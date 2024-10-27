@@ -47,7 +47,7 @@ export default function Navbar() {
     // Promise.all([
     console.log(input),
       // auth.register(input.email, input.password),  //registrarse con email y con password por firebase
-      axios.post(`http://localhost:3001/user/create`, input) // post con los inputs para crear el usuario
+      axios.post(`https://royalback-du3v.onrender.com/user/create`, input) // post con los inputs para crear el usuario
         // ])
         .then((response) => {
           const { id } = response.data;
