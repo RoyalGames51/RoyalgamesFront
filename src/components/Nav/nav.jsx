@@ -5,7 +5,7 @@ import { FaGoogle } from "react-icons/fa"; // Icono de Google
 import axios from "axios";
 import Swal from "sweetalert2";
 
-import { useAuth } from "../../../context/authContext";
+import { useAuth } from "../../../src/context/oauthContext";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 
@@ -69,7 +69,7 @@ const auth = useAuth();
               text: "¡Datos registrados correctamente!",
               icon: "success",
             });
-            navigate("/")
+            // navigate("/")
           }else {
             Swal.fire({
                    icon: "error",
