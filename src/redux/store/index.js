@@ -11,6 +11,6 @@ const composeEnhacer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; /
 const store = createStore(
     reducer,
     // composeEnhacer(applyMiddleware(withExtraArgument(choferes)))); // Esta linea nos permite hacer petic
-     composeEnhacer(applyMiddleware(thunk))); 
+     composeEnhacer(applyMiddleware())); 
 
 export default store 
