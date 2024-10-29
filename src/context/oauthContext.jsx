@@ -61,7 +61,7 @@ export function AuthProvider({ children }) {
     const register = async (email, password) => {
         try {
             const response = await createUserWithEmailAndPassword(auth, email, password);
-            console.log(response.user); // Aquí puedes ver los datos del usuario registrado en Firebase
+            // Aquí puedes ver los datos del usuario registrado en Firebase
             return response.user;
         } catch (error) {
             console.error("Error al registrar usuario en Firebase:", error);
