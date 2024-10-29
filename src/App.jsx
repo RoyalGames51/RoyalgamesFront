@@ -6,6 +6,7 @@ import './App.css'
 import { Route, Routes, useLocation } from 'react-router-dom';
 import Home from './components/Home/home';
 import Footer from './components/footer/footer';
+import { AuthProvider } from './context/oauthContext';
 
 function App() {
   
@@ -21,6 +22,7 @@ function App() {
     mt={0}
     p={0}
     >
+      <AuthProvider>
       <Nav/>
 
       <Routes>
@@ -30,6 +32,7 @@ function App() {
         <Route path='/form' element={<Form />} /> */}
       </Routes>
       <Footer/>
+      </AuthProvider>
     </Container>
   )
 }
