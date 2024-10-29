@@ -1,5 +1,9 @@
 import { USER_BY_EMAIL } from "../actions/action.types";
 
+
+const initialState = {
+    currentUser: {}
+}
 const reducer = (state = initialState, action) => {
    //DESDE ACA MANEJA LA CANT DE OBJETO POR PAGINA
 
