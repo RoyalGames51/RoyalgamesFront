@@ -7,9 +7,11 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
+  <AuthProvider>
   <BrowserRouter>
   <ChakraProvider>
     <App />
   </ChakraProvider>
   </BrowserRouter>
+  </AuthProvider>
 )
