@@ -5,8 +5,18 @@ import { FaGoogle } from "react-icons/fa"; // Icono de Google
 import axios from "axios";
 import Swal from "sweetalert2";
 
+import { useAuth } from "../../../context/authContext";
+import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+
 
 export default function Navbar() {
+
+  const navigate = useNavigate();
+//Autenticacion
+const auth = useAuth();
+
+
   const [isLoginOpen, setIsLoginOpen] = useState(false); // Estado para cuadro de inicio de sesión
   const [isRegisterOpen, setIsRegisterOpen] = useState(false); // Estado para cuadro de registro
 
@@ -44,11 +54,11 @@ export default function Navbar() {
 
     let dataUser = {};
 
-    // Promise.all([
+     Promise.all([
     console.log(input),
-      // auth.register(input.email, input.password),  //registrarse con email y con password por firebase
+       auth.register(input.email, input.password),  //registrarse con email y con password por firebase
       axios.post(`https://royalback-du3v.onrender.com/user/create`, input) // post con los inputs para crear el usuario
-        // ])
+         ])
         .then((response) => {
           const { id } = response.data;
           console.log(id);
