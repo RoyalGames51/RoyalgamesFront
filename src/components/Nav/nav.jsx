@@ -76,7 +76,7 @@ const auth = useAuth();
                    title: "Oops...",
                   text: "Hubo un error en el registro",
                  });
-          }
+          } 
          
           
 
