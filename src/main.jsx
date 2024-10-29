@@ -5,6 +5,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from "../src/context/oauthContext.jsx";
 import store from './redux/store/index.js';
+import { Provider } from 'react-redux'
 
 import './index.css'
 
