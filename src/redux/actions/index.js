@@ -13,7 +13,7 @@ export const getUserByEmail = (email) => {
         try {
             const { data } = await axios.get(`https://royalback-du3v.onrender.com/user/email?email=${email}`);
            
-
+console.log("dat",data);
             if(data.banned)
                 throw new Error(`El usuario con email ${data.email} se encuentra bloqueado.`)
              dispatch({

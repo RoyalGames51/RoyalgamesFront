@@ -60,7 +60,7 @@ const auth = useAuth();
       axios.post(`https://royalback-du3v.onrender.com/user/create`, input) // post con los inputs para crear el usuario
          ])
         .then((response) => {
-          
+          console.log("res", response);
            const  {id}  = response;
           
           // dispatch(getUserByEmail(data.email))  // get con el input para setear el current user 
