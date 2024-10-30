@@ -59,10 +59,9 @@ const auth = useAuth();
        auth.register(input.email, input.password),  //registrarse con email y con password por firebase
       axios.post(`https://royalback-du3v.onrender.com/user/create`, input) // post con los inputs para crear el usuario
          ])
-        .then(({data:{id}}) => {
-          console.log("id",id);
-          console.log(data,"data");
-          // const  {id}  = data;
+        .then((response) => {
+          
+           const  {id}  = response;
           
           // dispatch(getUserByEmail(data.email))  // get con el input para setear el current user 
           if(id){
