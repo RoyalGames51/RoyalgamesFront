@@ -61,7 +61,7 @@ const auth = useAuth();
          ])
         .then((response) => {
           console.log("res", response);
-          const id = res[1]?.data?.id;
+          const id = response[1]?.data?.id;
           
           // dispatch(getUserByEmail(data.email))  // get con el input para setear el current user 
           if(id){
