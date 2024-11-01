@@ -7,6 +7,9 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import Home from './components/Home/home';
 import Footer from './components/footer/footer';
 import { AuthProvider } from './context/oauthContext';
+import Perfil from './components/Perfil/perfil';
+import BuyChips from './components/Buychips/buyChips';
+import LogOut from './components/Logout/logout';
 
 function App() {
   
@@ -28,8 +31,9 @@ function App() {
       <Routes>
       
         <Route path='/' element={<Home />} /> 
-        {/* <Route path='/detail/:id' element={<Detail />} />
-        <Route path='/form' element={<Form />} /> */}
+         <Route path='/perfil' element={<Perfil />} />
+        <Route path='/chips' element={<BuyChips />} /> 
+        <Route path='/logout' element={<LogOut />} /> 
       </Routes>
       <Footer/>
       </AuthProvider>

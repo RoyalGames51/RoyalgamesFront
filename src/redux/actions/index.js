@@ -6,7 +6,15 @@ import axios from 'axios'
 
 
 
-//
+export const cleanCurrentUser = () => {
+    return {
+        type: 'CLEAN_USER_BY_EMAIL',
+        payload: {
+            currentUser: null,
+        },
+    };
+
+}
 export const getUserByEmail = (email) => {
    
     return async (dispatch) => {

@@ -1,1 +1,2 @@
 export const USER_BY_EMAIL = 'USER_BY_EMAIL'
+export const CLEAN_USER_BY_EMAIL = "CLEAN_USER_BY_EMAIL"
