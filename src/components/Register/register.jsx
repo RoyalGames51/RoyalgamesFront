@@ -45,33 +45,68 @@ const RegistroForm = ({ onSwitchForm }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("llegue");
-    
+
         
-            const [firebaseResponse, backendResponse] = await Promise.all([
-                auth.register(input.email, input.password), 
-                axios.post(`https://royalback-du3v.onrender.com/user/create`, input)
-            ]);
-    
-            console.log("Respuestas recibidas:", firebaseResponse, backendResponse);
+
+        Promise.all([
+            auth.register(input.email, input.password), 
+       
+        axios.post(`https://royalback-du3v.onrender.com/user/create`, input),
+
+          ])
+            .then(([authResponse, { data }]) => {
+              
+      
+             // dispatch(getUserByEmail(data.email))  // get con el input para setear el current user 
+              
+              Swal.fire({
+                title: "¡Bien hecho!",
+                text: "¡Datos registrados correctamente!",
+                icon: "success",
+              });  
+              navigate("/")
             
-            const id = backendResponse?.data?.id;
+            })
+            .catch((error) => {
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Hubo un error en el registro",
+              });
+            });
+          }
+
+//     await Promise.all([
+
+      
     
-            if (id) {
-                Swal.fire({
-                    title: "¡Bien hecho!",
-                    text: "¡Datos registrados correctamente!",
-                    icon: "success",
-                });
-                window.location.reload();
-            } else {
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "Hubo un error en el registro",
-                });
-            }
-        
-    };
+//     ]).then((response) => {
+//             console.log("res", response);
+//             const id = response[1]?.data?.id;
+//             console.log("1");
+// console.log("response",response);
+
+//             // dispatch(getUserByEmail(data.email))  // get con el input para setear el current user 
+//             if (id) {
+//                 Swal.fire({
+//                     title: "¡Bien hecho!",
+//                     text: "¡Datos registrados correctamente!",
+//                     icon: "success",
+//                 });
+//                 window.location.reload()
+//                 // navigate("/")
+//             } else {
+//                 Swal.fire({
+//                     icon: "error",
+//                     title: "Oops...",
+//                     text: "Hubo un error en el registro",
+//                 });
+//             }
+
+
+
+//         })
+//     }
     const toggleLoginBox = () => {
         // setIsLoginOpen(!isLoginOpen);
          setIsRegisterOpen(false); // Cerrar el cuadro de registro si está abierto

@@ -1,4 +1,4 @@
-import { USER_BY_EMAIL } from "./action.types";
+import { CLEAN_USER_BY_EMAIL, USER_BY_EMAIL } from "./action.types";
 import axios from 'axios'
 
 
@@ -8,7 +8,7 @@ import axios from 'axios'
 
 export const cleanCurrentUser = () => {
     return {
-        type: 'CLEAN_USER_BY_EMAIL',
+        type: CLEAN_USER_BY_EMAIL,
         payload: {
             currentUser: null,
         },
