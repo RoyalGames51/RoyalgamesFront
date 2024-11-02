@@ -46,40 +46,10 @@ const RegistroForm = ({ onSwitchForm }) => {
         e.preventDefault();
         console.log("llegue");
 
-        
-
-        // Promise.all([
-        //     axios.post(`https://royalback-du3v.onrender.com/user/create`, input),
-        //     auth.register(input.email, input.password), 
-       
-        
-
-        //   ])
-        //     .then(([authResponse, { data }]) => {
-              
-      
-        //      // dispatch(getUserByEmail(data.email))  // get con el input para setear el current user 
-              
-        //       Swal.fire({
-        //         title: "¡Bien hecho!",
-        //         text: "¡Datos registrados correctamente!",
-        //         icon: "success",
-        //       });  
-        //       navigate("/")
-            
-        //     })
-        //     .catch((error) => {
-        //       Swal.fire({
-        //         icon: "error",
-        //         title: "Oops...",
-        //         text: "Hubo un error en el registro",
-        //       });
-        //     });
-        //   }
 
      Promise.all([
 console.log(input),
-        axios.post(`https://royalback-du3v.onrender.com/user/create`, input),
+       await axios.post(`https://royalback-du3v.onrender.com/user/create`, input),
              auth.register(input.email, input.password), 
     
     ]).then((response) => {
