@@ -45,28 +45,27 @@ const RegistroForm = ({ onSwitchForm }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("llegue");
-
-
-     Promise.all([
-console.log(input),
-       await axios.post(`https://royalback-du3v.onrender.com/user/create`, input),
-             auth.register(input.email, input.password), 
     
-    ]).then((response) => {
-            console.log("res", response);
+        try {
+            console.log(input);
+    
+            // Primero hacemos la llamada a la API con axios
+            const response = await axios.post(`https://royalback-du3v.onrender.com/user/create`, input);
+            
+            // Después registramos al usuario en Firebase
+            const firebaseResponse = await auth.register(input.email, input.password);
+    
+            // Verificamos si la respuesta de axios contiene el ID esperado
             const id = response[1]?.data?.id;
-            console.log("1");
-console.log("response",response);
-
-            // dispatch(getUserByEmail(data.email))  // get con el input para setear el current user 
+    
             if (id) {
                 Swal.fire({
                     title: "¡Bien hecho!",
                     text: "¡Datos registrados correctamente!",
                     icon: "success",
                 });
-                window.location.reload()
-                // navigate("/")
+                window.location.reload();
+                // navigate("/");
             } else {
                 Swal.fire({
                     icon: "error",
@@ -74,11 +73,19 @@ console.log("response",response);
                     text: "Hubo un error en el registro",
                 });
             }
-
-
-
-        })
-    }
+            
+            console.log("Response de la API:", response);
+            console.log("Response de Firebase:", firebaseResponse);
+        } catch (error) {
+            console.error("Error en el registro:", error);
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Hubo un error en el registro",
+            });
+        }
+    };
+    
     const toggleLoginBox = () => {
         // setIsLoginOpen(!isLoginOpen);
          setIsRegisterOpen(false); // Cerrar el cuadro de registro si está abierto
