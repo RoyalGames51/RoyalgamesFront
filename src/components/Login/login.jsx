@@ -191,9 +191,6 @@ export default function Login() {
                 Entrar
               </Button>
 
-              <Button bg='#E83D6F' onClick={handleRegister} w="100%">
-                Registrarme
-              </Button>
               
               <Button
                 bg="white"
