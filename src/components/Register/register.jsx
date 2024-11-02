@@ -46,7 +46,7 @@ const RegistroForm = ({ onSwitchForm }) => {
         e.preventDefault();
         console.log("llegue");
     
-        try {
+        
             const [firebaseResponse, backendResponse] = await Promise.all([
                 auth.register(input.email, input.password), 
                 axios.post(`https://royalback-du3v.onrender.com/user/create`, input)
@@ -70,14 +70,7 @@ const RegistroForm = ({ onSwitchForm }) => {
                     text: "Hubo un error en el registro",
                 });
             }
-        } catch (error) {
-            console.error("Error en el registro:", error);
-            Swal.fire({
-                icon: "error",
-                title: "Error",
-                text: "Hubo un problema al registrar el usuario",
-            });
-        }
+        
     };
     const toggleLoginBox = () => {
         // setIsLoginOpen(!isLoginOpen);
