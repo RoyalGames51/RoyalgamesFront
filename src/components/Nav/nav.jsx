@@ -21,8 +21,7 @@ export default function Navbar() {
   
   useEffect(() => {
     console.log(currentUser);
-}, [currentUser]); 
- return (
+}, [currentUser]);  return (
     <Box
       width="100%"
       height="100px"
