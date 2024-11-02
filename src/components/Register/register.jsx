@@ -45,27 +45,24 @@ const RegistroForm = ({ onSwitchForm }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("llegue");
-    Promise.all([
-
-        auth.register(input.email, input.password), 
-        console.log(axios.post(`https://royalback-du3v.onrender.com/user/create`, input)), //registrarse con email y con password por firebase
-        axios.post(`https://royalback-du3v.onrender.com/user/create`, input),
-        console.log("llega aqui 2") // post con los inputs para crear el usuario
-    ]).then((response) => {
-            console.log("res", response);
-            const id = response[1]?.data?.id;
-            console.log("1");
-console.log("response",response);
-
-            // dispatch(getUserByEmail(data.email))  // get con el input para setear el current user 
+    
+        try {
+            const [firebaseResponse, backendResponse] = await Promise.all([
+                auth.register(input.email, input.password), 
+                axios.post(`https://royalback-du3v.onrender.com/user/create`, input)
+            ]);
+    
+            console.log("Respuestas recibidas:", firebaseResponse, backendResponse);
+            
+            const id = backendResponse?.data?.id;
+    
             if (id) {
                 Swal.fire({
                     title: "¡Bien hecho!",
                     text: "¡Datos registrados correctamente!",
                     icon: "success",
                 });
-                window.location.reload()
-                // navigate("/")
+                window.location.reload();
             } else {
                 Swal.fire({
                     icon: "error",
@@ -73,11 +70,15 @@ console.log("response",response);
                     text: "Hubo un error en el registro",
                 });
             }
-
-
-
-        })
-    }
+        } catch (error) {
+            console.error("Error en el registro:", error);
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Hubo un problema al registrar el usuario",
+            });
+        }
+    };
     const toggleLoginBox = () => {
         // setIsLoginOpen(!isLoginOpen);
          setIsRegisterOpen(false); // Cerrar el cuadro de registro si está abierto
