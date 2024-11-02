@@ -34,13 +34,13 @@ export default function Navbar() {
       
       {/* Links de juegos */}
       {["Bingo", "Ruleta", "Parchis", "y 10 juegos más"].map((juego) => (
-        <Box mr={"15px"} key={juego}>
+        <Box mr={"15px"} key={juego} >
           <Link to="/">
             <Text color={"white"} fontSize={"20px"}>{juego}</Text>
           </Link>
         </Box>
       ))}
-      
+      <Flex pl={"30%"}>
       {currentUser?.id ? (
           <LogOut /> // Muestra solo el botón de logout si la sesión está iniciada
         ) : (
@@ -49,7 +49,7 @@ export default function Navbar() {
             <RegistroForm /> {/* Botón de registrarse */}
           </>
         )}
-        
+        </Flex>
     
     </Box>
   );
