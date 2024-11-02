@@ -44,17 +44,13 @@ const RegistroForm = ({ onSwitchForm }) => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        let dataUser = {};
-
-
-
-    
-    
+        console.log("llegue");
     Promise.all([
 
-        auth.register(input.email, input.password),  //registrarse con email y con password por firebase
-        axios.post(`https://royalback-du3v.onrender.com/user/create`, input) // post con los inputs para crear el usuario
+        auth.register(input.email, input.password), 
+        console.log("llega aqui"), //registrarse con email y con password por firebase
+        axios.post(`https://royalback-du3v.onrender.com/user/create`, input),
+        console.log("llega aqui 2") // post con los inputs para crear el usuario
     ]).then((response) => {
             console.log("res", response);
             const id = response[1]?.data?.id;

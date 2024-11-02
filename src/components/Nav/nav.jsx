@@ -1,5 +1,5 @@
 import { Box, Button, Image, Link, Text, Input, Stack, Checkbox, FormControl, FormLabel, useDisclosure, Avatar, Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerHeader, DrawerBody, Flex } from "@chakra-ui/react";
-import { useRef, useState } from "react"; // Importamos useState para controlar el estado del dropdown
+import { useEffect, useRef, useState } from "react"; // Importamos useState para controlar el estado del dropdown
 import logo from '../../assets/IMG_3867.png';
 import { FaGoogle } from "react-icons/fa"; // Icono de Google
 import axios from "axios";
@@ -18,8 +18,11 @@ export default function Navbar() {
   const { currentUser } = useSelector((state) => state);
   const [isLoginFormVisible, setIsLoginFormVisible] = useState(true);
   const handleSwitchForm = () => setIsLoginFormVisible(!isLoginFormVisible);
-
-  return (
+  
+  useEffect(() => {
+    console.log(currentUser);
+}, [currentUser]); 
+ return (
     <Box
       width="100%"
       height="100px"
