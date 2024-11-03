@@ -144,9 +144,14 @@ export default function Navbar() {
     )}
   </Flex>
 </Box>
-<Box bgColor={"green"} ml={"22%"}>
+{currentUser?.id ? (
+        <>
+         <Box bgColor={"green"} ml={"22%"}>
   <UserZone/>
 </Box>
+        </>
+      ) : null}
+
 
       <Flex pl={"4%"}>
       {currentUser?.id ? (
