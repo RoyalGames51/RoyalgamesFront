@@ -46,7 +46,7 @@ export default function Navbar() {
               color: "white",
               textDecoration: location.pathname === '/' ? 'underline' : 'none',
               marginRight: '35px',
-              fontSize: '23px'
+              fontSize: '21px'
             }}
           >
             INICIO
@@ -57,7 +57,7 @@ export default function Navbar() {
               color: "white",
               textDecoration: location.pathname === '/panel' ? 'underline' : 'none',
               marginRight: '35px',
-              fontSize: '23px'
+              fontSize: '21px'
             }}
           >
             PANEL DE ADMINISTRACIÓN
@@ -74,7 +74,7 @@ export default function Navbar() {
               color: "white",
               textDecoration: location.pathname === '/' ? 'underline' : 'none',
               marginRight: '35px',
-              fontSize: '23px'
+              fontSize: '21px'
             }}
           >
             Inicio
@@ -83,9 +83,9 @@ export default function Navbar() {
             to="/about"
             style={{
               color: "white",
-              textDecoration: location.pathname === '/about' ? 'underline' : 'none',
+              textDecoration: location.pathname === '/juegos' ? 'underline' : 'none',
               marginRight: '35px',
-              fontSize: '23px'
+              fontSize: '21px'
             }}
           >
             Juegos
@@ -94,8 +94,8 @@ export default function Navbar() {
             to="/questions"
             style={{
               color: "white",
-              textDecoration: location.pathname === '/questions' ? 'underline' : 'none',
-              fontSize: '23px'
+              textDecoration: location.pathname === '/novedades' ? 'underline' : 'none',
+              fontSize: '21px'
             }}
           >
             Novedades
@@ -112,31 +112,31 @@ export default function Navbar() {
               color: "white",
               textDecoration: location.pathname === '/' ? 'underline' : 'none',
               marginRight: '35px',
-              fontSize: '23px'
+              fontSize: '21px'
             }}
           >
-            Bingo
+           Inicio
           </NavLink>
           <NavLink
             to="/ruleta"
             style={{
               color: "white",
-              textDecoration: location.pathname === '/about' ? 'underline' : 'none',
+              textDecoration: location.pathname === '/juegos' ? 'underline' : 'none',
               marginRight: '35px',
-              fontSize: '23px'
+              fontSize: '21px'
             }}
           >
-            Ruleta
+            Juegos
           </NavLink>
           <NavLink
             to="/juegos"
             style={{
               color: "white",
-              textDecoration: location.pathname === '/questions' ? 'underline' : 'none',
-              fontSize: '23px'
+              textDecoration: location.pathname === '/novedades' ? 'underline' : 'none',
+              fontSize: '21px'
             }}
           >
-            y 10 juegos más
+           Novedades
           </NavLink>
           {currentUser && currentUser?.admin ? <LogOut /> : null}
         </Flex>

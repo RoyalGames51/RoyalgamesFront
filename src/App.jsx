@@ -10,13 +10,15 @@ import { AuthProvider } from './context/oauthContext';
 import Perfil from './components/Perfil/perfil';
 import BuyChips from './components/Buychips/buyChips';
 import LogOut from './components/Logout/logout';
+import Panel from './components/Panel/panelAdmin';
+import GameGrid from './components/Juegos/juegos';
 
 function App() {
   
 
   return (
     <Container
-    bgColor={"#a4a4a4"}
+    bgColor={"white"}
     maxW="100%"  w="100%"
     maxH="100%" h="100%"
     // bgSize="cover"
@@ -32,8 +34,11 @@ function App() {
       
         <Route path='/' element={<Home />} /> 
          <Route path='/perfil' element={<Perfil />} />
+         <Route path='/juegos' element={<GameGrid />} />
         <Route path='/chips' element={<BuyChips />} /> 
         <Route path='/logout' element={<LogOut />} /> 
+        <Route path='/panel' element={<Panel/>}/>
+        
       </Routes>
       <Footer/>
       </AuthProvider>
