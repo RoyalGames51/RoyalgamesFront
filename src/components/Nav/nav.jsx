@@ -148,7 +148,7 @@ export default function Navbar() {
   <UserZone/>
 </Box>
 
-      <Flex pl={"30%"}>
+      <Flex pl={"4%"}>
       {currentUser?.id ? (
           <LogOut /> // Muestra solo el botón de logout si la sesión está iniciada
         ) : (
