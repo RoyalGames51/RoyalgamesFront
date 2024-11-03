@@ -12,6 +12,7 @@ import BuyChips from './components/Buychips/buyChips';
 import LogOut from './components/Logout/logout';
 import Panel from './components/Panel/panelAdmin';
 import GameGrid from './components/Juegos/juegos';
+import News from './components/News/news';
 
 function App() {
   
@@ -38,6 +39,7 @@ function App() {
         <Route path='/chips' element={<BuyChips />} /> 
         <Route path='/logout' element={<LogOut />} /> 
         <Route path='/panel' element={<Panel/>}/>
+        <Route path='/novedades' element={<News/>}/>
         
       </Routes>
       <Footer/>
