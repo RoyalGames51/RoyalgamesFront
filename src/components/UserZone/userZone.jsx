@@ -5,15 +5,16 @@ export default function UserZone() {
   const { currentUser } = useSelector((state) => state);
 
   return (
-    <Flex bgColor={"blue"} w={"10%"} h={"5%"}>
+    <Flex bgColor={"blue"} w={"10%"} h={"auto"} p={2} align="center">
       {currentUser?.id ? (
-        <Stack align="center">
-          <Avatar src={currentUser.avatar} /> {/* Agrega el src al avatar del usuario */}
-          <Text fontWeight="bold">{currentUser.nick}</Text> {/* Nickname */}
-          <Text color="gray.500">{`Chips: ${currentUser.chips}`}</Text> {/* Fichas */}
-        </Stack>
+        <>
+          <Avatar src={currentUser.avatar} />
+          <Stack spacing={0} ml={3}> {/* Margen a la izquierda del nickname y las fichas */}
+            <Text fontWeight="bold" color="white">{currentUser.nick}</Text> {/* Nickname */}
+            <Text color="gray.300">{`Chips: ${currentUser.chips}`}</Text> {/* Fichas */}
+          </Stack>
+        </>
       ) : null}
     </Flex>
   );
 }
- 
