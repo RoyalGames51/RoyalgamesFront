@@ -6,7 +6,7 @@ export default function UserZone() {
     const { currentUser } = useSelector((state) => state);
 
     return (
-        <Flex w={"200px"} h={"auto"} p={2} align="center" pl={3} bg="#caf3a6" borderRadius="md" >
+        <Flex w={"200px"} h={"auto"} p={2} align="center" pl={3} bg="#616161" borderRadius="md" >
             {currentUser?.id ? (
                 <>
                     <Avatar src={currentUser.avatar} />
