@@ -60,7 +60,7 @@ export default function Navbar() {
               fontSize: '21px'
             }}
           >
-            PANEL DE ADMINISTRACIÓN
+            PANEL 
           </NavLink>
         </Flex>
       </Box>
@@ -146,7 +146,7 @@ export default function Navbar() {
 </Box>
 {currentUser?.id ? (
         <>
-         <Box bgColor={"green"} ml={"22%"}>
+         <Box  ml={"22%"}>
   <UserZone/>
 </Box>
         </>
