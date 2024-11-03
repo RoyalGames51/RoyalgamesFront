@@ -13,6 +13,7 @@ import RegistroForm from "../Register/register";
 import { ViewIcon } from "@chakra-ui/icons";
 import LogOut from "../Logout/logout";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import UserZone from "../UserZone/userZone";
 
 
 export default function Navbar() {
@@ -143,7 +144,9 @@ export default function Navbar() {
     )}
   </Flex>
 </Box>
-
+<Box>
+  <UserZone/>
+</Box>
 
       <Flex pl={"30%"}>
       {currentUser?.id ? (
