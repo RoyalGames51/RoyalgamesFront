@@ -144,7 +144,7 @@ export default function Navbar() {
     )}
   </Flex>
 </Box>
-<Box bgColor={"gray.200"}>
+<Box bgColor={"gray.200"} ml={"30%"}>
   <UserZone/>
 </Box>
 
