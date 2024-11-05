@@ -34,7 +34,7 @@ export default function UserZone() {
                             ml={7} // Ajusta el margen para pegarlo más al perfil
                         />
                         <MenuList bg="#616161" borderColor="gray.600" color="white" mt="0" minW="fit-content" p={0}>
-                            <MenuItem _hover={{ bg: "#505050" }} justifyContent="center">
+                            <MenuItem _hover={{ bg: "#505050" }} justifyContent="center" ml={"-100px"}>
                                 <Logout />
                             </MenuItem>
                         </MenuList>
