@@ -1,8 +1,9 @@
 import { Box, Avatar, Text, Stack, Flex, Image, Menu, MenuButton, MenuList, MenuItem, IconButton } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useSelector } from "react-redux";
-import Logout from "./Logout"; // Asegúrate de que la ruta sea correcta
+// Asegúrate de que la ruta sea correcta
 import chips from "../../assets/chips.png";
+import LogOut from "../Logout/logout";
 
 export default function UserZone() {
     const { currentUser } = useSelector((state) => state);
@@ -35,7 +36,7 @@ export default function UserZone() {
                         />
                         <MenuList bg="#616161" borderColor="gray.600" color="white">
                             <MenuItem _hover={{ bg: "#505050" }}>
-                                <Logout />
+                                <LogOut />
                             </MenuItem>
                         </MenuList>
                     </Menu>
