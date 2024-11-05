@@ -19,15 +19,14 @@ function App() {
 
   return (
     <Container
-    bgColor={"white"}
-    maxW="100%"  w="100%"
-    maxH="100%" h="100%"
-    // bgSize="cover"
-    // bgAttachment={"fixed"}
-    // h={pathname != "/" ? "130vh" : undefined}
-    mt={0}
-    p={0}
-    >
+  bgGradient="linear(to-t, white, gray.200)"
+  maxW="100%"
+  w="100%"
+  maxH="100%"
+  h="100%"
+  mt={0}
+  p={0}
+>
       <AuthProvider>
       <Nav/>
 

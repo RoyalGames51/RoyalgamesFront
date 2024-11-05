@@ -148,6 +148,9 @@ export default function Navbar() {
         <>
          <Box  ml={"22%"}>
   <UserZone/>
+  <Button>
+    <Link to={"/chips"}>Comprar fichas</Link>
+  </Button>
 </Box>
         </>
       ) : null}
