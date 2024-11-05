@@ -148,9 +148,7 @@ export default function Navbar() {
         <>
          <Box  ml={"22%"}>
   <UserZone/>
-  <Button>
-    <Link to={"/chips"}>Comprar fichas</Link>
-  </Button>
+ 
 </Box>
         </>
       ) : null}
@@ -158,7 +156,9 @@ export default function Navbar() {
 
       <Flex pl={"4%"}>
       {currentUser?.id ? (
-          <LogOut /> // Muestra solo el botón de logout si la sesión está iniciada
+           <Button>
+           <Link to={"/chips"}>Comprar fichas</Link>
+         </Button>
         ) : (
           <>
             <Login />    {/* Botón de iniciar sesión */}
