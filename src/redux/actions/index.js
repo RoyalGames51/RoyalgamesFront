@@ -18,6 +18,7 @@ export const cleanCurrentUser = () => {
 export const getUserByEmail = (email) => {
    
     return async (dispatch) => {
+        
         try {
             const { data } = await axios.get(`https://royalback-du3v.onrender.com/user/email?email=${email}`);
            
