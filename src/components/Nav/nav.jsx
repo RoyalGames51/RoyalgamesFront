@@ -80,7 +80,7 @@ export default function Navbar() {
             Inicio
           </NavLink>
           <NavLink
-            to="/about"
+            to="/juegos"
             style={{
               color: "white",
               textDecoration: location.pathname === '/juegos' ? 'underline' : 'none',
@@ -91,7 +91,7 @@ export default function Navbar() {
             Juegos
           </NavLink>
           <NavLink
-            to="/questions"
+            to="/novedades"
             style={{
               color: "white",
               textDecoration: location.pathname === '/novedades' ? 'underline' : 'none',
@@ -107,7 +107,7 @@ export default function Navbar() {
         <Flex>
           <NavLink
             exact
-            to="/bingo"
+            to="/"
             style={{
               color: "white",
               textDecoration: location.pathname === '/' ? 'underline' : 'none',
@@ -118,7 +118,7 @@ export default function Navbar() {
            Inicio
           </NavLink>
           <NavLink
-            to="/ruleta"
+            to="/juegos"
             style={{
               color: "white",
               textDecoration: location.pathname === '/juegos' ? 'underline' : 'none',
@@ -129,7 +129,7 @@ export default function Navbar() {
             Juegos
           </NavLink>
           <NavLink
-            to="/juegos"
+            to="/novedades"
             style={{
               color: "white",
               textDecoration: location.pathname === '/novedades' ? 'underline' : 'none',

@@ -26,19 +26,30 @@ import billon from '../../assets/1billon.jpg';
 import veinticeisb from '../../assets/26billones.jpg';
 
 export default function BuyChips() {
+    //paypal
   const [country, setCountry] = useState("resto del mundo");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedChip, setSelectedChip] = useState(null);
 
+  // Configuración de precios y monedas por país
+  const countryConfig = {
+    argentina: { currency: "ARS", exchangeRate: 1000 },
+    brasil: { currency: "BRL", exchangeRate: 5 },
+    eeuu: { currency: "USD", exchangeRate: 1 },
+    espana: { currency: "EUR", exchangeRate: 0.9 },
+    mexico: { currency: "MXN", exchangeRate: 20 },
+    "resto del mundo": { currency: "USD", exchangeRate: 1 },
+  };
+
   const chipOptions = [
-    { id: 1, price: "US$1", amount: "500000 fichas", image: quinientosmil },
-    { id: 2, price: "US$2", amount: "1000000 fichas", image: millon },
-    { id: 3, price: "US$6", amount: "5000000 fichas", image: cincomillones },
-    { id: 4, price: "US$15", amount: "15000000 fichas", image: quincemillones },
-    { id: 5, price: "US$50", amount: "50000000 fichas", image: cincuentamillones },
-    { id: 6, price: "US$200", amount: "250000000 fichas", image: doscincuenta },
-    { id: 7, price: "US$500", amount: "1000000000 fichas", image: billon },
-    { id: 8, price: "US$1000", amount: "2600000000 fichas", image: veinticeisb },
+    { id: 1, basePrice: 1, amount: "500000 fichas", image: quinientosmil },
+    { id: 2, basePrice: 2, amount: "1000000 fichas", image: millon },
+    { id: 3, basePrice: 6, amount: "5000000 fichas", image: cincomillones },
+    { id: 4, basePrice: 15, amount: "15000000 fichas", image: quincemillones },
+    { id: 5, basePrice: 50, amount: "50000000 fichas", image: cincuentamillones },
+    { id: 6, basePrice: 200, amount: "250000000 fichas", image: doscincuenta },
+    { id: 7, basePrice: 500, amount: "1000000000 fichas", image: billon },
+    { id: 8, basePrice: 1000, amount: "2600000000 fichas", image: veinticeisb },
   ];
 
   const handleCountryChange = (e) => setCountry(e.target.value);
@@ -53,81 +64,87 @@ export default function BuyChips() {
     setSelectedChip(null);
   };
 
+  // Obtén la configuración del país actual
+  const { currency, exchangeRate } = countryConfig[country];
+
   return (
     <Flex ml={"10%"}>
-    <Box p={5} bgColor={"white"} m={3} borderRadius={"20px"} w={"65%"} border={"1px"} borderColor={"black"}>
-      <Text fontSize="2xl" mb={4} textAlign={"center"} fontWeight="bold">Royal Chips</Text>
+      <Box p={5} bgColor={"white"} m={3} borderRadius={"20px"} w={"65%"} border={"1px"} borderColor={"black"}>
+        <Text fontSize="2xl" mb={4} textAlign={"center"} fontWeight="bold">Royal Chips</Text>
 
-      <Select textAlign={"center"} 
-      mb={4} 
-      placeholder="Selecciona tu país" 
-      onChange={handleCountryChange} 
-      bgColor={"white"} w={"200px"}
-      alignItems={"center"}
-      border={"1px"}
-      borderColor={"black"}>
-        <option value="argentina">Argentina</option>
-        <option value="brasil">Brasil</option>
-        <option value="eeuu">EEUU</option>
-        <option value="espana">España</option>
-        <option value="mexico">México</option>
-        <option value="resto del mundo">Resto del Mundo</option>
-      </Select>
+        <Select
+          textAlign={"center"}
+          mb={4}
+          placeholder="Selecciona tu país"
+          onChange={handleCountryChange}
+          bgColor={"white"}
+          w={"200px"}
+          alignItems={"center"}
+          border={"1px"}
+          borderColor={"black"}
+        >
+          {Object.keys(countryConfig).map((countryKey) => (
+            <option key={countryKey} value={countryKey}>
+              {countryKey.charAt(0).toUpperCase() + countryKey.slice(1)}
+            </option>
+          ))}
+        </Select>
 
-      <Grid templateColumns="repeat(4, 1fr)" gap={6}>
-        {chipOptions.map((chip) => (
-          <Box
-            key={chip.id}
-            textAlign="center"
-            borderWidth="1px"
-            borderRadius="lg"
-            overflow="hidden"
-            onClick={() => openPaymentModal(chip)}
-            cursor="pointer"
-            p={4}
-            bgColor={"#9eff00"}
-            border={"1px"}
-            borderColor={"black"}
-          >
-            <Image borderRadius={"10px"} src={chip.image} alt={`Chip ${chip.amount}`}  mb={3} /> {/* Muestra la imagen correspondiente */}
-           
-            <Text bgColor={"#000000"} borderRadius={"20px"} color={"white"}>{chip.price} </Text> {/* Aquí puedes modificar para precios por país */}
-          </Box>
-        ))}
-      </Grid>
+        <Grid templateColumns="repeat(4, 1fr)" gap={6}>
+          {chipOptions.map((chip) => (
+            <Box
+              key={chip.id}
+              textAlign="center"
+              borderWidth="1px"
+              borderRadius="lg"
+              overflow="hidden"
+              onClick={() => openPaymentModal(chip)}
+              cursor="pointer"
+              p={4}
+              bgColor={"#9eff00"}
+              border={"1px"}
+              borderColor={"black"}
+            >
+              <Image borderRadius={"10px"} src={chip.image} alt={`Chip ${chip.amount}`} mb={3} />
+              <Text bgColor={"#000000"} borderRadius={"20px"} color={"white"}>
+                {currency} {(chip.basePrice * exchangeRate).toFixed(2)}
+              </Text>
+            </Box>
+          ))}
+        </Grid>
 
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Selecciona un método de pago</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Text mb={3}>{selectedChip?.amount}</Text>
-            <VStack align="stretch">
-              <Button variant="outline">Tarjeta Bancaria</Button>
-              <Button variant="outline">Criptomoneda</Button>
-              <Button variant="outline">PayPal</Button>
-              <Button variant="outline">Paysafecard</Button>
-              <Button variant="outline">Mercado Pago</Button>
-            </VStack>
-          </ModalBody>
-          <ModalFooter>
-            <Button colorScheme="blue" onClick={closeModal}>
-              Cerrar
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </Box>
-    <Box border={"1px"} borderColor={"black"} w={"20%"} m={3} borderRadius={"20px"} bgColor={"white"} h={"50%"}>
-<Text fontWeight={"bold"} textAlign={"center"} p={3}>
-    Que son las RoyalChips?
-</Text>
-<Text p={6} fontSize={"13px"}>
-    Las Royal Chips son la moneda oficial de la pagina, con ellas podras apostar en los juegos y comprar avatares personalizados. 
-    Cabe destacar que las Royal Chips son monedas ficticias, no intercambiables por dinero real, son solo para divertirse.
-</Text>
-    </Box>
+        <Modal isOpen={isModalOpen} onClose={closeModal}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Selecciona un método de pago</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Text mb={3}>{selectedChip?.amount}</Text>
+              <VStack align="stretch">
+                <Button variant="outline">Tarjeta Bancaria</Button>
+                <Button variant="outline">Criptomoneda</Button>
+                <Button variant="outline">PayPal</Button>
+                <Button variant="outline">Paysafecard</Button>
+                <Button variant="outline">Mercado Pago</Button>
+              </VStack>
+            </ModalBody>
+            <ModalFooter>
+              <Button colorScheme="blue" onClick={closeModal}>
+                Cerrar
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      </Box>
+      <Box border={"1px"} borderColor={"black"} w={"20%"} m={3} borderRadius={"20px"} bgColor={"white"} h={"50%"}>
+        <Text fontWeight={"bold"} textAlign={"center"} p={3}>
+          Qué son las RoyalChips?
+        </Text>
+        <Text p={6} fontSize={"13px"}>
+          Las Royal Chips son la moneda oficial de la página. Con ellas podrás apostar en los juegos y comprar avatares personalizados.
+          Cabe destacar que las Royal Chips son monedas ficticias, no intercambiables por dinero real; son solo para divertirse.
+        </Text>
+      </Box>
     </Flex>
   );
 }
