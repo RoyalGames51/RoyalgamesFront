@@ -23,6 +23,7 @@ import Swal from "sweetalert2";
 import { getUserByEmail, getUserByNick } from "../../redux/actions";
 import axios from "axios";
 
+
 export default function Login() {
   const [isLoginOpen, setIsLoginOpen] = useState(false); // Estado para cuadro de inicio de sesión
   const auth = useAuth();
@@ -46,8 +47,11 @@ export default function Login() {
     event.preventDefault();
     
     try {
+     
       if(input.email.includes("@")){
+        console.log("llega aca",input);
         await auth.login(input.email, input.password);
+        console.log("llega acaa",input.email);
         const getUser = await dispatch(getUserByEmail(input.email));
         navigate('/');
         Swal.fire({

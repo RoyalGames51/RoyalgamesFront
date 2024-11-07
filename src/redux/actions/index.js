@@ -20,7 +20,8 @@ export const getUserByEmail = (email) => {
     return async (dispatch) => {
         
         try {
-            const { data } = await axios.get(`https://royalback-du3v.onrender.com/user/email?email=${email}`);
+            console.log("email",email);
+            const { data } = await axios.get(`https://royalback-du3v.onrender.com/user/email`, email);
            
 console.log("dat",data);
             if(data.banned)
