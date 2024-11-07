@@ -20,7 +20,7 @@ import { useAuth } from "../../context/oauthContext";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
-import { getUserByEmail } from "../../redux/actions";
+import { getUserByEmail, getUserByNick } from "../../redux/actions";
 import axios from "axios";
 
 export default function Login() {
@@ -44,17 +44,33 @@ export default function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    
     try {
-      await auth.login(input.email, input.password);
-      const getUser = await dispatch(getUserByEmail(input.email));
-      navigate('/');
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "¡Inicio de sesión éxitoso!",
-        showConfirmButton: false,
-        timer: 2500,
-      });
+      if(input.email.includes("@")){
+        await auth.login(input.email, input.password);
+        const getUser = await dispatch(getUserByEmail(input.email));
+        navigate('/');
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "¡Inicio de sesión éxitoso!",
+          showConfirmButton: false,
+          timer: 2500,
+        });
+      } else {
+        const {data} = await dispatch(getUserByNick(input.email))
+        await auth.login(data.email, input.password);
+        navigate('/');
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "¡Inicio de sesión éxitoso!",
+          showConfirmButton: false,
+          timer: 2500,
+        });
+      }
+      //getuserbyNick
+      
     } catch (error) {
       console.error("Error al iniciar sesión:", error.message);
       Swal.fire({

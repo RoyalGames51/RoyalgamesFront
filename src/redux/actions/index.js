@@ -1,4 +1,4 @@
-import { CLEAN_USER_BY_EMAIL, USER_BY_EMAIL } from "./action.types";
+import { CLEAN_USER_BY_EMAIL, USER_BY_EMAIL, USER_BY_NICK } from "./action.types";
 import axios from 'axios'
 
 
@@ -28,6 +28,29 @@ console.log("dat",data);
              dispatch({
 
                 type: USER_BY_EMAIL,
+                payload: data
+            })
+        } catch (error) {
+            /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
+            
+            throw new Error(`Error de sesion: ${error.message}`)
+        }
+    };
+};
+
+export const getUserByNick = (nick) => {
+   
+    return async (dispatch) => {
+        
+        try {
+            const { data } = await axios.get(`https://royalback-du3v.onrender.com/user/nick`,nick);
+           
+
+            if(data.banned)
+                throw new Error(`El usuario con email ${data.email} se encuentra bloqueado.`)
+             dispatch({
+
+                type: USER_BY_NICK,
                 payload: data
             })
         } catch (error) {

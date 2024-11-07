@@ -1,4 +1,4 @@
-import { USER_BY_EMAIL,CLEAN_USER_BY_EMAIL } from "../actions/action.types";
+import { USER_BY_EMAIL,CLEAN_USER_BY_EMAIL, USER_BY_NICK } from "../actions/action.types";
 
 
 const initialState = {
@@ -21,6 +21,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 currentUser: action.payload
             }
+            case USER_BY_NICK:
+                return {
+                    ...state,
+                    currentUser: action.payload
+                }
             default:
                     return { ...state };
     }}
