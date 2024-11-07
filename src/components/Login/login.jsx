@@ -44,46 +44,40 @@ export default function Login() {
     });
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+  event.preventDefault();
+  
+  try {
+    let email = input.email;
     
-    try {
-     
-      if(input.email.includes("@")){
-        console.log("llega aca",input);
-        await auth.login(input.email, input.password);
-        console.log("llega acaa",input.email);
-        const getUser = await dispatch(getUserByEmail(input.email));
-        navigate('/');
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "¡Inicio de sesión éxitoso!",
-          showConfirmButton: false,
-          timer: 2500,
-        });
-      } else {
-        const {data} = await dispatch(getUserByNick(input.email))
-        await auth.login(data.email, input.password);
-        navigate('/');
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "¡Inicio de sesión éxitoso!",
-          showConfirmButton: false,
-          timer: 2500,
-        });
-      }
-      //getuserbyNick
-      
-    } catch (error) {
-      console.error("Error al iniciar sesión:", error.message);
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Contraseña incorrecta, intenta nuevamente",
-      });
+    if (!input.email.includes("@")) {
+      // Si el input no es un email, obtenemos el email asociado al nickname
+      const { data } = await dispatch(getUserByNick(input.email));
+      email = data.email; // Asignamos el email obtenido del nickname
     }
-  };
+
+    console.log("Email usado para login:", email);
+    await auth.login(email, input.password); // Intentamos iniciar sesión con el email
+
+    // Redirige al inicio y muestra mensaje de éxito
+    navigate('/');
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "¡Inicio de sesión exitoso!",
+      showConfirmButton: false,
+      timer: 2500,
+    });
+
+  } catch (error) {
+    console.error("Error al iniciar sesión:", error.message);
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Contraseña incorrecta, intenta nuevamente",
+    });
+  }
+};
+
 
   const handleGoogleLogin = async (e) => {
     e.preventDefault();
