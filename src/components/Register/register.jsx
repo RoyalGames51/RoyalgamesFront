@@ -44,7 +44,7 @@ const RegistroForm = ({ onSwitchForm }) => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("llegue");
+   
 
 
      Promise.all([

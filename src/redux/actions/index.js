@@ -21,7 +21,7 @@ export const getUserByEmail = (email) => {
         
         try {
             console.log("email",email);
-            const { data } = await axios.get(`https://royalback-f340.onrender.com/user-email`, email);
+            const { data } = await axios.get(`https://royalback-f340.onrender.com/user-email?email=${email}`);
            
 console.log("dat",data);
             if(data.banned)
