@@ -44,7 +44,7 @@ export const getUserByNick = (nick) => {
     return async (dispatch) => {
         
         try {
-            const { data } = await axios.get(`https://royalback-f340.onrender.com/user-nick`,nick);
+            const { data } = await axios.get(`https://royalback-f340.onrender.com/user-nick?nick=${nick}`);
            
 
             if(data.banned)
