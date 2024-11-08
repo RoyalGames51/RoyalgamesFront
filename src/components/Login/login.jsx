@@ -51,22 +51,32 @@ export default function Login() {
     
     if (!input.email.includes("@")) {
       // Si el input no es un email, obtenemos el email asociado al nickname
-      const { data } = await dispatch(getUserByNick(input.email));
-      email = data.email; // Asignamos el email obtenido del nickname
+      await dispatch(getUserByNick(input.email,input.password,auth));
+      // Intentamos iniciar sesión con el email
+      navigate('/');
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "¡Inicio de sesión exitoso!",
+        showConfirmButton: false,
+        timer: 2500,
+      });
+    } else {
+      console.log("Email usado para login:", email);
+      await auth.login(email, input.password); // Intentamos iniciar sesión con el email
+  
+      // Redirige al inicio y muestra mensaje de éxito
+      navigate('/');
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "¡Inicio de sesión exitoso!",
+        showConfirmButton: false,
+        timer: 2500,
+      });
     }
 
-    console.log("Email usado para login:", email);
-    await auth.login(email, input.password); // Intentamos iniciar sesión con el email
-
-    // Redirige al inicio y muestra mensaje de éxito
-    navigate('/');
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "¡Inicio de sesión exitoso!",
-      showConfirmButton: false,
-      timer: 2500,
-    });
+    
 
   } catch (error) {
     console.error("Error al iniciar sesión:", error.message);

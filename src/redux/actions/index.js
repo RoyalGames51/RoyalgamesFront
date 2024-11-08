@@ -6,7 +6,10 @@ import axios from 'axios'
 
 
 
+
+
 export const cleanCurrentUser = () => {
+     
     return {
         type: CLEAN_USER_BY_EMAIL,
         payload: {
@@ -39,16 +42,18 @@ console.log("dat",data);
     };
 };
 
-export const getUserByNick = (nick) => {
+export const getUserByNick = (nick, password,auth) => {
    
     return async (dispatch) => {
-        
+    
         try {
+            
             const { data } = await axios.get(`https://royalback-f340.onrender.com/user-nick?nick=${nick}`);
-           
+            
 
             if(data.banned)
                 throw new Error(`El usuario con email ${data.email} se encuentra bloqueado.`)
+            await auth.login(data.email, password);
              dispatch({
 
                 type: USER_BY_NICK,
