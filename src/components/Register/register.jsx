@@ -49,7 +49,7 @@ const RegistroForm = ({ onSwitchForm }) => {
 
      Promise.all([
 console.log(input),
-        axios.post(`https://royalback-du3v.onrender.com/user/create`, input),
+        axios.post(`https://royalback-du3v.onrender.com/user-create`, input),
              auth.register(input.email, input.password), 
     
     ]).then((response) => {
