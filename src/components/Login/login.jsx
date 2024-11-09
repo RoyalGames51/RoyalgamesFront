@@ -171,7 +171,7 @@ export default function Login() {
                   type="text"
                   value={input.email}
                   onChange={handleInputChange}
-                  placeholder="Ingresa tu Correo / Email"
+                  placeholder="Ingresa tu Nick o Email"
                   name="email"
                   fontSize="md"
                   color="black"
@@ -184,7 +184,7 @@ export default function Login() {
                   <Input
                     bg="white"
                     type={show ? "text" : "password"}
-                    placeholder="Ingresa una contraseña"
+                    placeholder="Ingresa tu contraseña"
                     name="password"
                     onChange={handleInputChange}
                     fontSize="md"
