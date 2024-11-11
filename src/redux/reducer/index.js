@@ -1,11 +1,12 @@
-import { USER_BY_EMAIL,CLEAN_USER_BY_EMAIL, USER_BY_NICK } from "../actions/action.types";
+import { USER_BY_EMAIL, CLEAN_USER_BY_EMAIL, USER_BY_NICK, ADMINISTRAR_USER } from "../actions/action.types";
 
 
 const initialState = {
-    currentUser: {}
+    currentUser: {},
+    administradorUser: {}
 }
 const reducer = (state = initialState, action) => {
-   //DESDE ACA MANEJA LA CANT DE OBJETO POR PAGINA
+    //DESDE ACA MANEJA LA CANT DE OBJETO POR PAGINA
 
     switch (action.type) {
 
@@ -21,14 +22,20 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 currentUser: action.payload
             }
-            case USER_BY_NICK:
-                return {
-                    ...state,
-                    currentUser: action.payload
-                }
-            default:
-                    return { ...state };
-    }}
+        case USER_BY_NICK:
+            return {
+                ...state,
+                currentUser: action.payload
+            }
+        case ADMINISTRAR_USER:
+            return {
+                ...state,
+                administradorUser: action.payload
+            }
+        default:
+            return { ...state };
+    }
+}
 
 
-    export default reducer
+export default reducer

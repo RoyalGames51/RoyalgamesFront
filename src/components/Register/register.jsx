@@ -8,11 +8,12 @@ import {
     FormLabel,
     Input,
     Button,
- Stack,
+    Stack,
     Text,
     Box,
     Checkbox,
 } from "@chakra-ui/react";
+import regalo from '../../assets/regalobienvenida.png'
 
 
 //HOOKS
@@ -44,19 +45,19 @@ const RegistroForm = ({ onSwitchForm }) => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-   
 
 
-     Promise.all([
-console.log(input),
-        axios.post(`https://royalback-f340.onrender.com/user-create`, input),
-             auth.register(input.email, input.password), 
-    
-    ]).then((response) => {
+
+        Promise.all([
+            console.log(input),
+            axios.post(`https://royalback-f340.onrender.com/user-create`, input),
+            auth.register(input.email, input.password),
+
+        ]).then((response) => {
             console.log("res", response);
             const id = response[1]?.data?.id;
             console.log("1");
-console.log("response",response);
+            console.log("response", response);
 
             // dispatch(getUserByEmail(data.email))  // get con el input para setear el current user 
             if (id) {
@@ -81,12 +82,12 @@ console.log("response",response);
     }
     const toggleLoginBox = () => {
         // setIsLoginOpen(!isLoginOpen);
-         setIsRegisterOpen(false); // Cerrar el cuadro de registro si está abierto
-      };
-      const toggleRegisterBox = () => {
-     setIsRegisterOpen(!isRegisterOpen);
-    //setIsLoginOpen(false); // Cerrar el cuadro de login si está abierto
-  };
+        setIsRegisterOpen(false); // Cerrar el cuadro de registro si está abierto
+    };
+    const toggleRegisterBox = () => {
+        setIsRegisterOpen(!isRegisterOpen);
+        //setIsLoginOpen(false); // Cerrar el cuadro de login si está abierto
+    };
     return (
         <Box mr={"15px"}>
             <Button

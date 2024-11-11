@@ -1,3 +1,6 @@
 export const USER_BY_EMAIL = 'USER_BY_EMAIL'
 export const CLEAN_USER_BY_EMAIL = "CLEAN_USER_BY_EMAIL"
 export const USER_BY_NICK = 'USER_BY_NICK'
+export const ADMINISTRAR_USER = 'ADMINISTRAR_USER'
+export const ADD_CHIPS = 'ADD_CHIPS'
+export const REMOVE_CHIPS = 'REMOVE_CHIPS'

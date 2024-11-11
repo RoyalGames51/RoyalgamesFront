@@ -1,4 +1,4 @@
-import { CLEAN_USER_BY_EMAIL, USER_BY_EMAIL, USER_BY_NICK } from "./action.types";
+import { ADMINISTRAR_USER, CLEAN_USER_BY_EMAIL, USER_BY_EMAIL, USER_BY_NICK } from "./action.types";
 import axios from 'axios'
 
 
@@ -27,8 +27,10 @@ export const getUserByEmail = (email) => {
             const { data } = await axios.get(`https://royalback-f340.onrender.com/user-email?email=${email}`);
            
 console.log("dat",data);
-            if(data.banned)
-                throw new Error(`El usuario con email ${data.email} se encuentra bloqueado.`)
+if (data.banned) {
+    
+    return;
+}
              dispatch({
 
                 type: USER_BY_EMAIL,
@@ -57,6 +59,27 @@ export const getUserByNick = (nick, password,auth) => {
              dispatch({
 
                 type: USER_BY_NICK,
+                payload: data
+            })
+        } catch (error) {
+            /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
+            
+            throw new Error(`Error de sesion: ${error.message}`)
+        }
+    };
+};
+
+export const administrarUser = (nick) => {
+   
+    return async (dispatch) => {
+    
+        try {
+            
+            const { data } = await axios.get(`https://royalback-f340.onrender.com/user-nick?nick=${nick}`);
+            
+             dispatch({
+
+                type: ADMINISTRAR_USER,
                 payload: data
             })
         } catch (error) {

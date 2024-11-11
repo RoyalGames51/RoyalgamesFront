@@ -1,6 +1,7 @@
 import { Box, Image, Grid } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import juego1 from '../../assets/IMG_4119.png'
+import juego2 from '../../assets/ruleta.jpg'
 
 export default function GameGrid() {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export default function GameGrid() {
         {/* Caja contenedora 1 */}
         <Box 
           bg="gray.200" 
-          p="20px" 
+          p="10px" 
           borderRadius="10px"
           onClick={() => handleGameClick("/loteria-instantanea")} /* Ejemplo de ruta para el juego 1 */
           cursor="pointer"
@@ -35,12 +36,12 @@ export default function GameGrid() {
         <Box 
         h={"200px"}
           bg="gray.200" 
-          p="20px" 
+          p="10px" 
           borderRadius="10px"
           onClick={() => handleGameClick("/game2")} /* Ejemplo de ruta para el juego 2 */
           cursor="pointer"
         >
-          <Image src="/images/game2.jpg" alt="Juego 2" w="100%" />
+          <Image src={juego2} alt="Juego 2" w="100%" />
         </Box>
 
         {/* Caja contenedora 3 */}
