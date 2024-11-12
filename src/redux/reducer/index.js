@@ -1,9 +1,10 @@
-import { USER_BY_EMAIL, CLEAN_USER_BY_EMAIL, USER_BY_NICK, ADMINISTRAR_USER } from "../actions/action.types";
+import { USER_BY_EMAIL, CLEAN_USER_BY_EMAIL, USER_BY_NICK, ADMINISTRAR_USER, PROMO1K } from "../actions/action.types";
 
 
 const initialState = {
     currentUser: {},
-    administradorUser: {}
+    administradorUser: {},
+    counterUser:{}
 }
 const reducer = (state = initialState, action) => {
     //DESDE ACA MANEJA LA CANT DE OBJETO POR PAGINA
@@ -31,6 +32,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 administradorUser: action.payload
+            }
+        case PROMO1K:
+            return{
+                ...state,
+                counterUser:action.payload
             }
         default:
             return { ...state };

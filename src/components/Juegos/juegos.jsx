@@ -27,14 +27,14 @@ export default function GameGrid() {
           borderRadius="10px"
           onClick={() => handleGameClick("/loteria-instantanea")} /* Ejemplo de ruta para el juego 1 */
           cursor="pointer"
-          h={"200px"}
+          h={"250px"}
         >
           <Image src={juego1} alt="Juego 1" w="100%" />
         </Box>
 
         {/* Caja contenedora 2 */}
         <Box 
-        h={"200px"}
+        h={"250px"}
           bg="gray.200" 
           p="10px" 
           borderRadius="10px"

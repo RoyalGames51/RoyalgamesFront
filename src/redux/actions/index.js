@@ -1,4 +1,4 @@
-import { ADMINISTRAR_USER, CLEAN_USER_BY_EMAIL, USER_BY_EMAIL, USER_BY_NICK } from "./action.types";
+import { ADMINISTRAR_USER, CLEAN_USER_BY_EMAIL, PROMO1K, USER_BY_EMAIL, USER_BY_NICK } from "./action.types";
 import axios from 'axios'
 
 
@@ -86,6 +86,29 @@ export const administrarUser = (nick) => {
             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
             
             throw new Error(`Error de sesion: ${error.message}`)
+        }
+    };
+};
+
+export const promo1millon = () => {
+   
+    return async (dispatch) => {
+    
+        try {
+            
+            const { data } = await axios.get(`https://royalback-f340.onrender.com/getUsers`);
+            
+            
+            const userCount = Array.isArray(data) ? data.length : data.count; // Verifica si es un arreglo o un objeto con 'count'
+            console.log(userCount,"usercount");
+            dispatch({
+                type: PROMO1K,
+                payload: userCount,
+            });
+        } catch (error) {
+            /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
+            
+            throw new Error(`Error al añadir las fichas: ${error.message}`)
         }
     };
 };

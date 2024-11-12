@@ -1,5 +1,6 @@
 //DEPENDENCIES
 import axios from 'axios';
+import { validateNick, validateEmail, validatePassword } from './validate'
 
 //Styles
 import Swal from "sweetalert2";
@@ -17,14 +18,29 @@ import regalo from '../../assets/regalobienvenida.png'
 
 
 //HOOKS
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../context/oauthContext";
 import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from 'react-redux';
+import { promo1millon } from '../../redux/actions';
 
 const RegistroForm = ({ onSwitchForm }) => {
     const navigate = useNavigate();
     //Autenticacion
     const auth = useAuth();
+
+    const [errors, setErrors] = useState({
+        nick: "",
+        email: "",
+        password: "",
+    });
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(promo1millon());
+    }, [dispatch]);
+    const countUsers = useSelector((state) => state.counterUser);
 
     const [isRegisterOpen, setIsRegisterOpen] = useState(false); // Estado para cuadro de registro
 
@@ -43,43 +59,38 @@ const RegistroForm = ({ onSwitchForm }) => {
             [property]: value,
         });
     }
+    
+
+        
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-
-
-        Promise.all([
-            console.log(input),
-            axios.post(`https://royalback-f340.onrender.com/user-create`, input),
-            auth.register(input.email, input.password),
-
-        ]).then((response) => {
-            console.log("res", response);
-            const id = response[1]?.data?.id;
-            console.log("1");
-            console.log("response", response);
-
-            // dispatch(getUserByEmail(data.email))  // get con el input para setear el current user 
-            if (id) {
-                Swal.fire({
-                    title: "¡Bien hecho!",
-                    text: "¡Datos registrados correctamente!",
-                    icon: "success",
-                });
-                window.location.reload()
-                // navigate("/")
-            } else {
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "Hubo un error en el registro",
+        try {
+            const [registerResponse, userResponse] = await Promise.all([
+                auth.register(input.email, input.password),
+                axios.post(`https://royalback-f340.onrender.com/user-create`, input),
+            ]);
+    
+            const id = userResponse?.data?.id;
+            if (countUsers < 1000 && id) {
+                await axios.put('https://royalback-f340.onrender.com/add/chips', {
+                    id: id,
+                    newChips: 1000000,
                 });
             }
-
-
-
-        })
-    }
+    
+            Swal.fire({
+                title: "¡Bien hecho!",
+                text: "¡Datos registrados correctamente!",
+                icon: "success",
+            });
+            window.location.reload() 
+        } catch (error) {
+            console.error("Error en el registro:", error);
+            Swal.fire("Oops...", "Hubo un error en el registro", "error");
+        }
+    };
+    
     const toggleLoginBox = () => {
         // setIsLoginOpen(!isLoginOpen);
         setIsRegisterOpen(false); // Cerrar el cuadro de registro si está abierto
