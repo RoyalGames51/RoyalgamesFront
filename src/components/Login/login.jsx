@@ -143,14 +143,30 @@ export default function Login() {
     <Box>
       {/* Botón para abrir el cuadro de inicio de sesión */}
       <Button
-        borderRadius={"20px"}
-        color={"black"}
-        bgColor={"#94f341"}
-        fontSize={"20px"}
-        onClick={toggleLoginBox}
-      >
-        Iniciar Sesión
-      </Button>
+      onClick={toggleLoginBox}
+      bgGradient="linear(to-r, #1a880f, #8eff17)" // Gradiente de color
+      color="white"
+      size="lg"
+      fontSize="lg"
+      fontWeight="bold"
+      borderRadius="full"
+      boxShadow="0 4px 6px rgba(0, 0, 0, 0.1)" // Sombra suave
+      _hover={{
+        bgGradient: "linear(to-r, #8eff17, #1a880f)", // Cambia el gradiente en hover
+        boxShadow: "0 6px 10px rgba(0, 0, 0, 0.2)", // Sombra más fuerte en hover
+        transform: "scale(1.05)", // Leve efecto de agrandamiento en hover
+      }}
+      _active={{
+        bgGradient: "linear(to-r, teal.500, blue.600)", // Color al hacer clic
+        transform: "scale(0.95)", // Ligeramente más pequeño al hacer clic
+      }}
+      _focus={{
+        outline: "none",
+        boxShadow: "0 0 1px 2px teal.500", // Resaltado en el foco
+      }}
+    >
+      Login
+    </Button>
 
       {/* Cuadro de inicio de sesión, se muestra solo si isLoginOpen es true */}
       {isLoginOpen && (

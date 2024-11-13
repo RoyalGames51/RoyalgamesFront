@@ -27,7 +27,7 @@ function App() {
       const timer = setTimeout(() => {
         setShowWelcomeGift(true);
         localStorage.setItem('hasSeenWelcome', 'true'); // Guarda que ya vio el mensaje
-      }, 4000); // Esperar 3 segundos antes de mostrar el cartel
+      }, 2500); // Esperar 3 segundos antes de mostrar el cartel
 
       return () => clearTimeout(timer); // Limpiar el temporizador si el componente se desmonta antes de los 3 segundos
     }
