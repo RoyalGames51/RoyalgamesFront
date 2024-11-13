@@ -56,7 +56,7 @@ function App() {
           <Route path="/chips" element={<BuyChips />} />
           <Route path="/logout" element={<LogOut />} />
           <Route path="/panel" element={<Panel />} />
-          <Route path="/novedades" element={<News />} />
+          <Route path="/noticias" element={<News />} />
         </Routes>
         <Footer />
         {/* Modal o Cartel de Bienvenida */}

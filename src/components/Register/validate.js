@@ -33,5 +33,8 @@ export const validatePassword = (password) => {
     if (password.length < 6) {
         return "La contraseña debe tener al menos 6 caracteres.";
     }
+    if (password.length > 15) {
+        return "La contraseña debe tener menos de 15 caracteres.";
+    }
     return null;
 };

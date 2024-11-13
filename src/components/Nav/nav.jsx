@@ -17,6 +17,8 @@ import UserZone from "../UserZone/userZone";
 
 
 export default function Navbar() {
+
+  
   const { currentUser } = useSelector((state) => state);
   const [isLoginFormVisible, setIsLoginFormVisible] = useState(true);
   const handleSwitchForm = () => setIsLoginFormVisible(!isLoginFormVisible);
@@ -26,33 +28,27 @@ export default function Navbar() {
 }, [currentUser]);  return (
     <Box
       width="100%"
-      height="100px"
+      height="70px"
       display="flex"
       bg="linear-gradient(180deg, #000000 80%, #666666 100%)"
       padding="15px"
       alignItems="center"
     >
-      <Image src={logo} pr={"120px"} w={"25%"} pt={"10px"} />
+      <Link to="/"
+      >
+        <Flex maxW={"360px"} >
+    <Image src={logo}  w="100%" pt="10px" alt="Logo" />
+    </Flex>
+</Link>
       
-      <Box w="100%" alignContent="center" justifyContent="center">
+      <Box w="100%" alignContent="center" justifyContent="center" ml={"10%"}>
   <Flex justify="center" alignItems="center">
     {currentUser?.admin && currentUser?.admin ? (
       <Box>
         <Flex>
+          
           <NavLink
-            exact
-            to="/"
-            style={{
-              color: "white",
-              textDecoration: location.pathname === '/' ? 'underline' : 'none',
-              marginRight: '35px',
-              fontSize: '21px'
-            }}
-          >
-            INICIO
-          </NavLink>
-          <NavLink
-            to="/panel"
+            to="/panel" 
             style={{
               color: "white",
               textDecoration: location.pathname === '/panel' ? 'underline' : 'none',
@@ -67,18 +63,7 @@ export default function Navbar() {
     ) : currentUser?.admin === false ? (
       <Box>
         <Flex>
-          <NavLink
-            exact
-            to="/"
-            style={{
-              color: "white",
-              textDecoration: location.pathname === '/' ? 'underline' : 'none',
-              marginRight: '35px',
-              fontSize: '21px'
-            }}
-          >
-            Inicio
-          </NavLink>
+        
           <NavLink
             to="/juegos"
             style={{
@@ -91,32 +76,21 @@ export default function Navbar() {
             Juegos
           </NavLink>
           <NavLink
-            to="/novedades"
+            to="/noticias"
             style={{
               color: "white",
-              textDecoration: location.pathname === '/novedades' ? 'underline' : 'none',
+              textDecoration: location.pathname === '/noticias' ? 'underline' : 'none',
               fontSize: '21px'
             }}
           >
-            Novedades
+            Noticias
           </NavLink>
         </Flex>
       </Box>
     ) : (
-      <Box>
-        <Flex>
-          <NavLink
-            exact
-            to="/"
-            style={{
-              color: "white",
-              textDecoration: location.pathname === '/' ? 'underline' : 'none',
-              marginRight: '35px',
-              fontSize: '21px'
-            }}
-          >
-           Inicio
-          </NavLink>
+      <Box >
+        <Flex >
+          
           <NavLink
             to="/juegos"
             style={{
@@ -129,14 +103,14 @@ export default function Navbar() {
             Juegos
           </NavLink>
           <NavLink
-            to="/novedades"
+            to="/noticias"
             style={{
               color: "white",
-              textDecoration: location.pathname === '/novedades' ? 'underline' : 'none',
+              textDecoration: location.pathname === '/noticias' ? 'underline' : 'none',
               fontSize: '21px'
             }}
           >
-           Novedades
+           Noticias
           </NavLink>
           {currentUser && currentUser?.admin ? <LogOut /> : null}
         </Flex>
@@ -146,15 +120,15 @@ export default function Navbar() {
 </Box>
 {currentUser?.id ? (
         <>
-         <Box  ml={"22%"}>
+         <Flex >
   <UserZone/>
  
-</Box>
+</Flex>
         </>
       ) : null}
 
 
-      <Flex pl={"4%"}>
+      <Flex pl={"1%"}>
       {currentUser?.id ? (
            <Button>
            <Link to={"/chips"}>Comprar fichas</Link>
