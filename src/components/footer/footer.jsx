@@ -32,11 +32,11 @@ pt={"10%"}
               <Link href='/about' isExternal mb={2}>
                 Sobre Nosotros <ExternalLinkIcon mx='2px' />
               </Link>
-              <Link href='/questions' isExternal mb={2}>
-                Preguntas Frecuentes <ExternalLinkIcon mx='2px' />
+              <Link href='/terminos-y-condiciones' isExternal mb={2}>
+                Terminos y condiciones <ExternalLinkIcon mx='2px' />
               </Link>
               <Link href='mailto:vamos.ong@gmail.com' isExternal >
-                ayuda@royalgames.com <ExternalLinkIcon mx='2px' />
+                royalgames2025@gmail.com <ExternalLinkIcon mx='2px' />
               </Link>
             </Flex>
           </Box>

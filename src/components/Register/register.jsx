@@ -6,6 +6,7 @@ import {
     FormLabel,
     Input,
     Button,
+    Link,
     Stack,
     Text,
     Flex,Image,
@@ -238,13 +239,23 @@ const RegistroForm = ({ onSwitchForm }) => {
                                 />
                                 {errors.password && <Text color="red.500">{errors.password}</Text>}
                             </FormControl>
-
                             <Checkbox
-                                isChecked={isTermsChecked}
-                                onChange={(e) => setIsTermsChecked(e.target.checked)}
-                            >
-                                He leído y acepto los términos y condiciones
-                            </Checkbox>
+    isChecked={isTermsChecked}
+    onChange={(e) => setIsTermsChecked(e.target.checked)}
+>
+    <Flex align="center">
+        <Text fontSize="12px">He leído y acepto los{" "}</Text>
+        <Link
+            color="blue.500"
+            onClick={() => navigate("/terminos-y-condiciones")}
+            textDecoration="underline"
+            fontSize="12px"
+            ml="1"
+        >
+            términos y condiciones
+        </Link>
+    </Flex>
+</Checkbox>
 
                             <Button
                                 colorScheme="teal"

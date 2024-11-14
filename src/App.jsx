@@ -13,6 +13,7 @@ import GameGrid from './components/Juegos/juegos';
 import News from './components/News/news';
 import regaloBienvenida from '../src/assets/regalobienvenida.png'; // Imagen del regalo
 import { useSelector } from 'react-redux';
+import TermsAndConditions from './components/termsyConds/terminosYCondiciones';
 
 function App() {
   const [showWelcomeGift, setShowWelcomeGift] = useState(false);
@@ -57,6 +58,7 @@ function App() {
           <Route path="/logout" element={<LogOut />} />
           <Route path="/panel" element={<Panel />} />
           <Route path="/noticias" element={<News />} />
+          <Route path="/terminos-y-condiciones" element={<TermsAndConditions />} />
         </Routes>
         <Footer />
         {/* Modal o Cartel de Bienvenida */}
