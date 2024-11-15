@@ -1,6 +1,6 @@
 import { Box, Button, Image, Text, Input, Stack, Checkbox, FormControl, FormLabel, useDisclosure, Avatar, Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerHeader, DrawerBody, Flex } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react"; // Importamos useState para controlar el estado del dropdown
-import logo from '../../assets/IMG_3867.png';
+import logo from '../../assets/logo.png';
 import { FaGoogle } from "react-icons/fa"; // Icono de Google
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -37,7 +37,7 @@ export default function Navbar() {
       <Link to="/"
       >
         <Flex maxW={"360px"} >
-    <Image src={logo}  w="100%" pt="10px" alt="Logo" />
+    <Image src={logo}  w="100%"  alt="Logo" />
     </Flex>
 </Link>
       
