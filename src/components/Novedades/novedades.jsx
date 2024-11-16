@@ -2,6 +2,7 @@ import { Box, Image } from "@chakra-ui/react";
 import banner1 from '../../assets/banner1.jpg';
 import banner2 from '../../assets/b1.jpg';
 import banner3 from '../../assets/banner3.jpg';
+import banner4 from '../../assets/bingoprox.jpg';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -11,6 +12,7 @@ export default function Novedades() {
     { id: 1, src: banner1, alt: "Banner 1" },
     { id: 2, src: banner2, alt: "Banner 2" },
     { id: 3, src: banner3, alt: "Banner 3" },
+    { id: 4, src: banner4, alt: "Banner 4" },
     // Agrega más imágenes según necesites
   ];
 
