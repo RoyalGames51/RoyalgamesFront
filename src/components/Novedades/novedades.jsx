@@ -33,8 +33,8 @@ export default function Novedades() {
       borderRadius="10px"
       overflow="hidden"
       mt={2}
-      pl={"85px"}
-      pr={"85px"}
+      pl={"120px"}
+      pr={"120px"}
     >
       <Slider {...settings}>
         {banners.map((banner) => (
