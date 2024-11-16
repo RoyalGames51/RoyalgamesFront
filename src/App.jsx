@@ -11,28 +11,37 @@ import LogOut from './components/Logout/logout';
 import Panel from './components/Panel/panelAdmin';
 import GameGrid from './components/Juegos/juegos';
 import News from './components/News/news';
-import regaloBienvenida from '../src/assets/regalobienvenida.png'; // Imagen del regalo
-import { useSelector } from 'react-redux';
+import regaloBienvenida from '../src/assets/regalobienvenida.png';
+import { useSelector, useDispatch } from 'react-redux';
 import TermsAndConditions from './components/termsyConds/terminosYCondiciones';
+import axios from 'axios';
+
 
 function App() {
   const [showWelcomeGift, setShowWelcomeGift] = useState(false);
   const { currentUser } = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    // Verifica si el usuario ya vio el mensaje de bienvenida
-    const hasSeenWelcome = localStorage.getItem('hasSeenWelcome');
+    const checkWelcomeGift = async () => {
+      if (currentUser?.id && !currentUser.firstChips) {
+        // Mostrar el regalo después de 2.5 segundos
+        const timer = setTimeout(() => setShowWelcomeGift(true), 2500);
 
-    // Si no ha visto el mensaje y está registrado, espera 3 segundos para mostrar el mensaje
-    if (!hasSeenWelcome && currentUser?.id) {
-      const timer = setTimeout(() => {
-        setShowWelcomeGift(true);
-        localStorage.setItem('hasSeenWelcome', 'true'); // Guarda que ya vio el mensaje
-      }, 2500); // Esperar 3 segundos antes de mostrar el cartel
+        try {
+          // Actualizar `firstChips` en el backend
+          await axios.put('https://royalback-f340.onrender.com/firstchips', { id: currentUser.id });
 
-      return () => clearTimeout(timer); // Limpiar el temporizador si el componente se desmonta antes de los 3 segundos
-    }
-  }, [currentUser]);
+        } catch (error) {
+          console.error('Error actualizando firstChips:', error);
+        }
+
+        return () => clearTimeout(timer); // Limpiar el temporizador
+      }
+    };
+
+    checkWelcomeGift();
+  }, [currentUser, dispatch]);
 
   const handleCloseGift = () => {
     setShowWelcomeGift(false);
@@ -62,7 +71,7 @@ function App() {
         </Routes>
         <Footer />
         {/* Modal o Cartel de Bienvenida */}
-        {showWelcomeGift && currentUser.id && (
+        {showWelcomeGift && currentUser?.id && (
           <Box
             position="fixed"
             top="50%"

@@ -27,12 +27,14 @@ export default function Novedades() {
 
   return (
     <Box
-      w="80%"  // Ancho total del contenedor
-      h="360px" // Altura para mostrar las imágenes
-      m="0 auto" // Centrar horizontalmente el contenedor
+      w="100%"  // Asegura que el contenedor ocupe el 100% del ancho disponible
+      h="auto" // La altura será automática según la relación de aspecto de la imagen
+      m="0 auto" // Centrar el contenedor
       borderRadius="10px"
       overflow="hidden"
       mt={2}
+      pl={"85px"}
+      pr={"85px"}
     >
       <Slider {...settings}>
         {banners.map((banner) => (
@@ -41,14 +43,14 @@ export default function Novedades() {
             display="flex"
             justifyContent="center"
             alignItems="center"
-            h="100%"
-            w="100%"
-            bg="gray.100" // Fondo de color para verificar los bordes de la imagen
+            w="100%" // Asegura que el contenedor ocupe el 100% del ancho
+            h="auto" // La altura del contenedor se ajusta al tamaño de la imagen
           >
             <Image
               borderRadius="10px"
-              maxH="100%" // Ajuste máximo de altura
-              objectFit="cover" // Asegura que la imagen ocupe todo el contenedor sin deformarse
+              w="100%" // Hace que la imagen ocupe el 100% del ancho del contenedor
+              h="auto" // Mantiene la proporción de la imagen sin estirarla
+              objectFit="cover" // Ajusta la imagen para cubrir el contenedor sin deformarse
               src={banner.src}
               alt={banner.alt}
             />
