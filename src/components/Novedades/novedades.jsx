@@ -35,8 +35,9 @@ export default function Novedades() {
       borderRadius="10px"
       overflow="hidden"
       mt={2}
-      pl={"120px"}
-      pr={"120px"}
+      pl={"5px"}
+      pr={"5px"}
+      pt={"5px"}
     >
       <Slider {...settings}>
         {banners.map((banner) => (

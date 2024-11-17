@@ -28,11 +28,13 @@ export default function Navbar() {
 }, [currentUser]);  return (
     <Box
       width="100%"
-      height="70px"
+      height="73px"
       display="flex"
-      bg="linear-gradient(180deg, #000000 80%, #666666 100%)"
+      bg="black"
       padding="15px"
       alignItems="center"
+      pr={"135px"}
+      pl={"125px"}
     >
       <Link to="/"
       >
@@ -128,18 +130,48 @@ export default function Navbar() {
       ) : null}
 
 
-      <Flex pl={"1%"}>
-      {currentUser?.id ? (
-           <Button>
-           <Link to={"/chips"}>Comprar fichas</Link>
-         </Button>
-        ) : (
-          <>
-            <Login />    {/* Botón de iniciar sesión */}
-            <RegistroForm /> {/* Botón de registrarse */}
-          </>
-        )}          
-        </Flex>
+<Flex pl={"1%"}>
+  {currentUser?.id ? (
+    <Button
+      as={Link} // Hace que el botón sea un enlace
+      to="/chips" // Ruta del enlace
+      bgGradient="linear(to-r, #13d500, #13d500)" // Gradiente verde
+      color="white" // Texto blanco
+      fontSize="lg" // Tamaño de fuente general
+      fontWeight="bold" // Texto en negrita
+      pt={2}
+      pb={2}
+      h={"60px"} // Bordes redondeados
+      // px={6} // Espaciado horizontal dentro del botón
+      // py={3} // Espaciado vertical dentro del botón
+      boxShadow="lg" // Sombra para dar efecto de profundidad
+      textAlign="center" // Centra el texto
+      _hover={{
+        bgGradient: "linear(to-r, #13d500, #13d500)", // Cambia el gradiente al pasar el mouse
+        transform: "scale(1.05)", // Agranda ligeramente el botón
+      }}
+      _active={{
+        bgGradient: "linear(to-r, green.600, green.700)", // Gradiente al hacer clic
+        transform: "scale(0.95)", // Reduce ligeramente el botón
+      }}
+    >
+      <Box>
+        <Box fontSize="lg" fontWeight="bold">
+          Comprar
+        </Box>
+        <Box fontSize="md" fontWeight="bold">
+          Fichas
+        </Box>
+      </Box>
+    </Button>
+  ) : (
+    <>
+      <Login /> {/* Botón de iniciar sesión */}
+      <RegistroForm /> {/* Botón de registrarse */}
+    </>
+  )}
+</Flex>
+
     
     </Box>
   );

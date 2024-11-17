@@ -8,7 +8,19 @@ export default function UserZone() {
     const { currentUser } = useSelector((state) => state);
 
     return (
-        <Flex w={"fit-content"} h={"auto"} p={2} align="center" pl={3} bg="#616161" borderRadius="md">
+        <Flex
+        w={"fit-content"}
+        h={"auto"}
+        p={2}
+        m={2}
+        align="center"
+        pl={3}
+        bg="green.500"
+        bgColor="black" // Verde con 70% de opacidad
+        borderRadius="md"
+        border={"1px"}
+        borderColor={"gray.600"}
+      >
             {currentUser?.id ? (
                 <>
                     <Avatar src={currentUser.avatar} />
@@ -30,8 +42,12 @@ export default function UserZone() {
                             variant="ghost"
                             color="white"
                             _hover={{ bg: "transparent" }}
+                            border={"1px"}
+                            borderColor={"gray.600"}
+                            h={"134%"}
                             _active={{ bg: "transparent" }}
-                            ml={7} // Ajusta el margen para pegarlo más al perfil
+                            mr={"-4%"}
+                            ml={8} // Ajusta el margen para pegarlo más al perfil
                         />
                         <MenuList bg="#616161" borderColor="gray.600" color="white" mt="0" minW="fit-content" p={0}>
                             <MenuItem _hover={{ bg: "#505050" }} justifyContent="center">

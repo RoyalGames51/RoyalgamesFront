@@ -2,6 +2,7 @@ import { Box, Image, Grid } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import juego1 from '../../assets/IMG_4119.png'
 import juego2 from '../../assets/ruleta.jpg'
+import juego3 from '../../assets/bingoproxi.png'
 
 export default function GameGrid() {
   const navigate = useNavigate();
@@ -12,8 +13,8 @@ export default function GameGrid() {
 
   return (
     <Box
-      w="75%" /* La caja principal ocupa el 75% del ancho de la pantalla */
-      m="0 auto" /* Centra la caja horizontalmente */
+      w="100%" /* La caja principal ocupa el 75% del ancho de la pantalla */
+      // m="0 auto" /* Centra la caja horizontalmente */
       p="20px"
     >
       <Grid 
@@ -22,7 +23,7 @@ export default function GameGrid() {
       >
         {/* Caja contenedora 1 */}
         <Box 
-          bg="gray.200" 
+          
           p="10px" 
           borderRadius="10px"
           onClick={() => handleGameClick("/loteria-instantanea")} /* Ejemplo de ruta para el juego 1 */
@@ -35,7 +36,7 @@ export default function GameGrid() {
         {/* Caja contenedora 2 */}
         <Box 
         h={"250px"}
-          bg="gray.200" 
+        
           p="10px" 
           borderRadius="10px"
           onClick={() => handleGameClick("/game2")} /* Ejemplo de ruta para el juego 2 */
@@ -47,13 +48,13 @@ export default function GameGrid() {
         {/* Caja contenedora 3 */}
         <Box 
         h={"200px"}
-          bg="gray.200" 
+         
           p="20px" 
           borderRadius="10px"
           onClick={() => handleGameClick("/game3")} /* Ejemplo de ruta para el juego 3 */
           cursor="pointer"
         >
-          <Image src="/images/game3.jpg" alt="Juego 3" w="100%" />
+          <Image src={juego3} alt="Juego 3" w="100%" />
         </Box>
 
         {/* Caja contenedora 4 */}
