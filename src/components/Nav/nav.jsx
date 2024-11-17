@@ -26,16 +26,16 @@ export default function Navbar() {
   useEffect(() => {
     console.log(currentUser);
 }, [currentUser]);  return (
-    <Box
-      width="100%"
-      height="73px"
-      display="flex"
-      bg="black"
-      padding="15px"
-      alignItems="center"
-      pr={"135px"}
-      pl={"125px"}
-    >
+  <Box
+  width="100%"
+  height="73px"
+  display="flex"
+  bgGradient="linear(to-b, #2e2e2e, black)"
+  padding="15px"
+  alignItems="center"
+  pr={"135px"}
+  pl={"125px"}
+>
       <Link to="/"
       >
         <Flex maxW={"360px"} >

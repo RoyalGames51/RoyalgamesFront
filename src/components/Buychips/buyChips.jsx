@@ -69,7 +69,7 @@ export default function BuyChips() {
 
   return (
     <Flex ml={"10%"}>
-      <Box p={5} bgColor={"white"} m={3} borderRadius={"20px"} w={"65%"} border={"1px"} borderColor={"black"}>
+      <Box p={5} bgColor={"white"} m={3} borderRadius={"20px"} w={"65%"}  boxShadow="0px 4px 10px rgba(0, 0, 0, 0.15)" >
         <Text fontSize="2xl" mb={4} textAlign={"center"} fontWeight="bold">Royal Chips</Text>
 
         <Select
@@ -102,8 +102,7 @@ export default function BuyChips() {
               cursor="pointer"
               p={4}
               bgColor={"#9eff00"}
-              border={"1px"}
-              borderColor={"black"}
+              boxShadow="0px 4px 10px rgba(0, 0, 0, 0.15)" 
             >
               <Image borderRadius={"10px"} src={chip.image} alt={`Chip ${chip.amount}`} mb={3} />
               <Text bgColor={"#000000"} borderRadius={"20px"} color={"white"}>
@@ -136,7 +135,7 @@ export default function BuyChips() {
           </ModalContent>
         </Modal>
       </Box>
-      <Box border={"1px"} borderColor={"black"} w={"20%"} m={3} borderRadius={"20px"} bgColor={"white"} h={"50%"}>
+      <Box boxShadow="0px 4px 10px rgba(0, 0, 0, 0.15)"  w={"20%"} m={3} borderRadius={"20px"} bgColor={"white"} h={"50%"}>
         <Text fontWeight={"bold"} textAlign={"center"} p={3}>
           Qué son las RoyalChips?
         </Text>

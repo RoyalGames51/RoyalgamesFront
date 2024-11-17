@@ -13,7 +13,6 @@ export default function Novedades() {
     { id: 2, src: banner2, alt: "Banner 2" },
     { id: 3, src: banner3, alt: "Banner 3" },
     { id: 4, src: banner4, alt: "Banner 4" },
-    // Agrega más imágenes según necesites
   ];
 
   const settings = {
@@ -29,15 +28,16 @@ export default function Novedades() {
 
   return (
     <Box
-      w="100%"  // Asegura que el contenedor ocupe el 100% del ancho disponible
-      h="auto" // La altura será automática según la relación de aspecto de la imagen
-      m="0 auto" // Centrar el contenedor
+      w="100%" 
+      h="auto"
+      m="0 auto"
       borderRadius="10px"
       overflow="hidden"
       mt={2}
-      pl={"5px"}
-      pr={"5px"}
-      pt={"5px"}
+      pl="5px"
+      pr="5px"
+      pt="5px"
+      
     >
       <Slider {...settings}>
         {banners.map((banner) => (
@@ -46,16 +46,17 @@ export default function Novedades() {
             display="flex"
             justifyContent="center"
             alignItems="center"
-            w="100%" // Asegura que el contenedor ocupe el 100% del ancho
-            h="auto" // La altura del contenedor se ajusta al tamaño de la imagen
+            w="100%"
+            h="auto"
           >
             <Image
               borderRadius="10px"
-              w="100%" // Hace que la imagen ocupe el 100% del ancho del contenedor
-              h="auto" // Mantiene la proporción de la imagen sin estirarla
-              objectFit="cover" // Ajusta la imagen para cubrir el contenedor sin deformarse
+              w="100%"
+              h="auto"
+              objectFit="cover"
               src={banner.src}
               alt={banner.alt}
+              boxShadow="0px 4px 10px rgba(0, 0, 0, 0.15)" // Aplica un sombreado predefinido (puedes ajustarlo)
             />
           </Box>
         ))}

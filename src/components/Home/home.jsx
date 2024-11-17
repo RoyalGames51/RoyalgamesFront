@@ -9,7 +9,8 @@ export default function () {
     <Box  pb={"1%"}  ml={"10%"} mr={"10%"}  pt={"0%"} borderRadius={"20px"}>
         <Novedades />
     </Box>
-    <Box  pb={"1%"} bgColor={"white"} ml={"10%"} mr={"10%"} p={"2%"} pt={"2%"} borderRadius={"20px"}>
+    <Box  pb={"1%"} bgColor={"white"} ml={"10%"} mr={"10%"} p={"2%"} pt={"2%"} borderRadius={"20px"}
+    boxShadow="0px 4px 10px rgba(0, 0, 0, 0.15)">
        {/* Renderiza la sección de novedades arriba */}
       <Flex mt="4">
         {/* Lista de usuarios en el lado izquierdo */}

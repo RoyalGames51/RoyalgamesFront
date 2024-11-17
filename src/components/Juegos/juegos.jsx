@@ -47,9 +47,9 @@ export default function GameGrid() {
 
         {/* Caja contenedora 3 */}
         <Box 
-        h={"200px"}
+        h={"250px"}
          
-          p="20px" 
+          p="10px" 
           borderRadius="10px"
           onClick={() => handleGameClick("/game3")} /* Ejemplo de ruta para el juego 3 */
           cursor="pointer"
