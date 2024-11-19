@@ -73,17 +73,13 @@ const RegistroForm = ({ onSwitchForm }) => {
         }
 
         try {
-            const packageMail = {
-                nick: input.nick,
-                email:input.email,
-                option:"signIn"
-            }
+           
             const [registerResponse, userResponse] = await Promise.all([
                 auth.register(input.email, input.password),
                 axios.post(`https://royalback-f340.onrender.com/user-create`, input),
-                axios.post(`https://royalback-f340.onrender.com/send-mail`,packageMail)
+                
             ]);
-
+      
             const id = userResponse?.data?.id;
             if (countUsers < 1000 && id) {
                 await axios.put('https://royalback-f340.onrender.com/add/chips', {
