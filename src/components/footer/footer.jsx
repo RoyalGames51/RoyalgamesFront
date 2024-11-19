@@ -25,6 +25,7 @@ pt={"10%"}
           color='white'
           px='3rem'
           flexDirection={{ base: 'column', md: 'row' }}
+          bgGradient="linear(to-b, #2e2e2e, black)"
         >
           <Box w='auto' h='auto' p='1' textAlign='center' order={{ base: 3, md: 2 }} pr={"4%"}>
             <Heading fontSize="x-large" textAlign="left" mb={4}>Nosotros:</Heading>
@@ -32,11 +33,12 @@ pt={"10%"}
               <Link href='/about' isExternal mb={2}>
                 Sobre Nosotros <ExternalLinkIcon mx='2px' />
               </Link>
+              
+              <Link href='mailto:vamos.ong@gmail.com' isExternal mb={2}>
+                royalgames2025@gmail.com <ExternalLinkIcon mx='2px' />
+              </Link>
               <Link href='/terminos-y-condiciones' isExternal mb={2}>
                 Terminos y condiciones <ExternalLinkIcon mx='2px' />
-              </Link>
-              <Link href='mailto:vamos.ong@gmail.com' isExternal >
-                royalgames2025@gmail.com <ExternalLinkIcon mx='2px' />
               </Link>
             </Flex>
           </Box>
