@@ -1,8 +1,9 @@
-import { Box, Image, Grid } from "@chakra-ui/react";
+import { Box, Image, Grid, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import juego1 from '../../assets/IMG_4119.png'
-import juego2 from '../../assets/ruleta.jpg'
-import juego3 from '../../assets/bingoproxi.png'
+import juego1 from '../../assets/IMG_4119.png';
+import juego2 from '../../assets/ruleta.png';
+import juego3 from '../../assets/bingoproxi.png';
+import juego4 from '../../assets/minas.png';
 
 export default function GameGrid() {
   const navigate = useNavigate();
@@ -13,85 +14,67 @@ export default function GameGrid() {
 
   return (
     <Box
-      w="100%" /* La caja principal ocupa el 75% del ancho de la pantalla */
-      // m="0 auto" /* Centra la caja horizontalmente */
+      w="90%" // Caja principal ocupa el 90% del ancho de la pantalla
+      m="0 auto" // Centra horizontalmente
       p="20px"
+      
     >
-      <Grid 
-        templateColumns="repeat(3, 1fr)" /* Crea 3 columnas iguales por fila */
-        gap="10%" /* Separación del 10% entre las cajas */
+      {/* Título centrado */}
+      <Text
+        fontSize="2xl" // Tamaño del texto
+        fontWeight="bold"
+        textAlign="center" // Centrar el texto
+        mb="20px" // Espaciado inferior
+        bgColor={"gray.200"}
+        borderTopRadius="15px"
       >
-        {/* Caja contenedora 1 */}
-        <Box 
-          
-          p="10px" 
-          borderRadius="10px"
-          onClick={() => handleGameClick("/loteria-instantanea")} /* Ejemplo de ruta para el juego 1 */
-          cursor="pointer"
-          h={"250px"}
-        >
-          <Image src={juego1} alt="Juego 1" w="100%" />
-        </Box>
+       Juegos
+      </Text>
 
-        {/* Caja contenedora 2 */}
-        <Box 
-        h={"250px"}
-        
-          p="10px" 
-          borderRadius="10px"
-          onClick={() => handleGameClick("/game2")} /* Ejemplo de ruta para el juego 2 */
-          cursor="pointer"
-        >
-          <Image src={juego2} alt="Juego 2" w="100%" />
-        </Box>
-
-        {/* Caja contenedora 3 */}
-        <Box 
-        h={"250px"}
-         
-          p="10px" 
-          borderRadius="10px"
-          onClick={() => handleGameClick("/game3")} /* Ejemplo de ruta para el juego 3 */
-          cursor="pointer"
-        >
-          <Image src={juego3} alt="Juego 3" w="100%" />
-        </Box>
-
-        {/* Caja contenedora 4 */}
-        <Box 
-       h={"200px"} 
-          bg="gray.200" 
-          p="20px" 
-          borderRadius="10px"
-          onClick={() => handleGameClick("/game4")} /* Ejemplo de ruta para el juego 4 */
-          cursor="pointer"
-        >
-          <Image src="/images/game4.jpg" alt="Juego 4" w="100%" />
-        </Box>
-
-        {/* Caja contenedora 5 */}
-        <Box 
-        h={"200px"}
-          bg="gray.200" 
-          p="20px" 
-          borderRadius="10px"
-          onClick={() => handleGameClick("/game5")} /* Ejemplo de ruta para el juego 5 */
-          cursor="pointer"
-        >
-          <Image src="/images/game5.jpg" alt="Juego 5" w="100%" />
-        </Box>
-
-        {/* Caja contenedora 6 */}
-        <Box 
-        h={"200px"}
-          bg="gray.200" 
-          p="20px" 
-          borderRadius="10px"
-          onClick={() => handleGameClick("/game6")} /* Ejemplo de ruta para el juego 6 */
-          cursor="pointer"
-        >
-          <Image src="/images/game6.jpg" alt="Juego 6" w="100%" />
-        </Box>
+      <Grid 
+        templateColumns="repeat(auto-fit, minmax(230px, 1fr))" // Ajusta dinámicamente según el tamaño de la pantalla
+        gap="30px" // Espaciado entre las cajas
+      >
+        {[ // Lista de juegos
+          { src: juego1, path: "/loteria-instantanea", alt: "Lotería" },
+          { src: juego2, path: "/ruleta", alt: "Ruleta" },
+          { src: juego3, path: "/bingo", alt: "Bingo" },
+          { src: juego4, path: "/minas", alt: "Minas" },
+        ].map((game, index) => (
+          <Box
+            key={index}
+            position="relative"
+            overflow="hidden"
+            borderRadius="15px"
+            boxShadow="0 4px 10px rgba(0, 0, 0, 0.2)"
+            cursor="pointer"
+            transition="transform 0.3s, box-shadow 0.3s"
+            _hover={{
+              transform: "scale(1.05)", // Efecto de zoom
+              boxShadow: "0 8px 20px rgba(0, 0, 0, 0.3)",
+            }}
+            onClick={() => handleGameClick(game.path)}
+          >
+            <Image
+              src={game.src}
+              alt={game.alt}
+              objectFit="cover" // Ajusta la imagen para que ocupe todo el espacio sin distorsión
+              w="100%"
+              h="225px" // Tamaño reducido
+            />
+            <Box
+              position="absolute"
+              bottom="0"
+              w="100%"
+              bg="rgba(0, 0, 0, 0.5)" // Fondo semi-transparente
+              color="white"
+              textAlign="center"
+              py="10px"
+            >
+              {game.alt} {/* Muestra el nombre del juego */}
+            </Box>
+          </Box>
+        ))}
       </Grid>
     </Box>
   );

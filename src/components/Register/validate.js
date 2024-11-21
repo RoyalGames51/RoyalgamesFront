@@ -1,7 +1,8 @@
 import { useDispatch } from "react-redux";
-export const validateNick = (nick) => {
-    // const dispatch = useDispatch()
-    // dispatch(getUserByNick(nick))
+import axios from "axios"
+
+export const validateNick = async (nick) => {
+    // Validaciones básicas
     if (!nick) {
         return "El nombre de usuario es obligatorio.";
     }
@@ -11,9 +12,20 @@ export const validateNick = (nick) => {
     if (nick.length > 20) {
         return "El nombre de usuario no puede tener más de 20 caracteres.";
     }
+
+    // Verificar existencia en la base de datos
+    try {
+        const response = await axios.get(`https://royalback-f340.onrender.com/user-nick?nick=${nick}`);
+        if (response.data.exists) {
+            return "Este nombre de usuario ya está en uso.";
+        }
+    } catch (error) {
+        console.error("Error al verificar el nick:", error);
+        return "Error al validar el nombre de usuario. Intenta nuevamente.";
+    }
+
     return null; // Indica que no hay error
 };
-
 export const validateEmail = (email) => {
     // Expresión regular para validar un correo electrónico básico
     const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;

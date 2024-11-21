@@ -10,10 +10,18 @@ export default function UserList() {
     // Fetch usuarios desde la base de datos
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("https://royalback-f340.onrender.com/getUsers");
-        console.log(response.data,"aaa");
-         // Cambia la URL según tu backend
-        setUsers(response.data);
+        const response = await axios.get(
+          "https://royalback-f340.onrender.com/getUsers"
+        ); // Cambia la URL según tu backend
+        
+        const allUsers = response.data;
+        
+        // Seleccionar un máximo de 7 usuarios aleatorios
+        const randomUsers = allUsers
+          .sort(() => Math.random() - 0.5) // Mezclar aleatoriamente
+          .slice(0, 7); // Tomar los primeros 7 usuarios
+        
+        setUsers(randomUsers);
         setLoading(false);
       } catch (error) {
         console.error("Error al obtener los usuarios:", error);
@@ -27,13 +35,13 @@ export default function UserList() {
   return (
     <Box
       w="300px"
-      h="1000px"
-       // Habilita el scroll si la lista es más grande que el contenedor
+      h="60%"
       bg="gray.100"
       borderRadius="10px"
       p="4"
-      ml={"3%"}
+      ml="3%"
       boxShadow="md"
+      
     >
       {loading ? (
         <Flex justify="center" align="center" h="100%">
@@ -57,7 +65,7 @@ export default function UserList() {
               mr="3"
             />
             <Box>
-              <Text fontWeight="bold">{user.nick}</Text>
+              <Text fontWeight="bold">{user.nick.charAt(0).toUpperCase() + user.nick.slice(1)}</Text>
               <Text fontSize="sm" color="gray.500">
                 Jugando
               </Text>
