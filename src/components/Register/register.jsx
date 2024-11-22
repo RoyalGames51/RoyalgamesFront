@@ -46,6 +46,7 @@ const RegistroForm = ({ onSwitchForm }) => {
 
     useEffect(() => {
         dispatch(promo1millon());
+        
     }, [dispatch]);
 
     const handleInputChange = (e) => {
@@ -59,7 +60,7 @@ const RegistroForm = ({ onSwitchForm }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const nickError = validateNick(input.nick);
+        const nickError = await validateNick(input.nick);
         const emailError = validateEmail(input.email);
         const passwordError = validatePassword(input.password);
 
