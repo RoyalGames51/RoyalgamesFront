@@ -58,7 +58,7 @@ export default function GameGrid() {
             <Image
               src={game.src}
               alt={game.alt}
-              objectFit="cover" // Ajusta la imagen para que ocupe todo el espacio sin distorsión
+              objectFit="contain" // Ajusta la imagen para que ocupe todo el espacio sin distorsión
               w="100%"
               h="225px" // Tamaño reducido
             />
