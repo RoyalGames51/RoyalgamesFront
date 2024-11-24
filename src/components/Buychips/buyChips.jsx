@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import axios from 'axios'
+
 import {
   Box,
   Grid,
@@ -42,14 +45,14 @@ export default function BuyChips() {
   };
 
   const chipOptions = [
-    { id: 1, basePrice: 1, amount: "500000 fichas", image: quinientosmil },
-    { id: 2, basePrice: 2, amount: "1000000 fichas", image: millon },
-    { id: 3, basePrice: 6, amount: "5000000 fichas", image: cincomillones },
-    { id: 4, basePrice: 15, amount: "15000000 fichas", image: quincemillones },
-    { id: 5, basePrice: 50, amount: "50000000 fichas", image: cincuentamillones },
-    { id: 6, basePrice: 200, amount: "250000000 fichas", image: doscincuenta },
-    { id: 7, basePrice: 500, amount: "1000000000 fichas", image: billon },
-    { id: 8, basePrice: 1000, amount: "2600000000 fichas", image: veinticeisb },
+    { id: 1, basePrice: 1, amount: "500000", image: quinientosmil },
+    { id: 2, basePrice: 2, amount: "1000000", image: millon },
+    { id: 3, basePrice: 6, amount: "5000000", image: cincomillones },
+    { id: 4, basePrice: 15, amount: "15000000", image: quincemillones },
+    { id: 5, basePrice: 50, amount: "50000000", image: cincuentamillones },
+    { id: 6, basePrice: 200, amount: "250000000", image: doscincuenta },
+    { id: 7, basePrice: 500, amount: "1000000000", image: billon },
+    { id: 8, basePrice: 1000, amount: "2600000000", image: veinticeisb },
   ];
 
   const handleCountryChange = (e) => setCountry(e.target.value);
@@ -66,6 +69,42 @@ export default function BuyChips() {
 
   // Obtén la configuración del país actual
   const { currency, exchangeRate } = countryConfig[country];
+
+
+  //MercadoPagoArgentina
+  const { currentUser } = useSelector((state) => state);
+  const createOrder = async () => {
+    if (!selectedChip) return alert("Selecciona un paquete de fichas.");
+    
+    const price = (selectedChip.basePrice * exchangeRate).toFixed(2);
+    const date = new Date().toISOString(); // Fecha actual para metadata
+  
+    const product = {
+      price: parseFloat(price), // Enviar como número
+      userId: currentUser?.id || "guest", // Asegúrate de que haya un ID de usuario
+      chips: selectedChip.amount,
+      paymentPlataform: "MercadoPago",
+      date,
+    };
+  
+    // Determinar la ruta de la orden según la moneda
+    let apiUrl = "https://royalback-f340.onrender.com/mepago/create-order"; // Ruta por defecto
+    if (currency === "ARS") {
+      apiUrl = "https://royalback-f340.onrender.com/mepago/create-order";
+    } else if (currency === "MXN") {
+      apiUrl = "https://royalback-f340.onrender.com/mepago/create-order/mx";
+    }
+  
+    try {
+      const response = await axios.post(apiUrl, product);
+  
+      // Redirige al link de MercadoPago
+      window.location.href = response.data;
+    } catch (error) {
+      console.error("Error al crear la orden:", error);
+    }
+  };
+  
 
   return (
     <Flex ml={"10%"}>
@@ -124,7 +163,8 @@ export default function BuyChips() {
                 <Button variant="outline">Criptomoneda</Button>
                 <Button variant="outline">PayPal</Button>
                 <Button variant="outline">Paysafecard</Button>
-                <Button variant="outline">Mercado Pago</Button>
+                <Button variant="outline" onClick={createOrder}>Mercado Pago</Button>
+
               </VStack>
             </ModalBody>
             <ModalFooter>
