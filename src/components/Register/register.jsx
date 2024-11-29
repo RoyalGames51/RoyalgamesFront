@@ -77,11 +77,13 @@ const RegistroForm = ({ onSwitchForm }) => {
            
             const [registerResponse, userResponse] = await Promise.all([
                 auth.register(input.email, input.password),
-                axios.post(`https://royalback-f340.onrender.com/user-create`, input),
+                axios.post(`https://royalback-f340.onrender.com/user-create`, input)
                 
             ]);
       
             const id = userResponse?.data?.id;
+            console.log("id", id);
+            
             if (countUsers < 1000 && id) {
                 await axios.put('https://royalback-f340.onrender.com/add/chips', {
                     id: id,

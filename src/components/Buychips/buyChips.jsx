@@ -113,11 +113,14 @@ useEffect(() => {
       const pay = {
         userId: currentUser?.id,
         paymentPlataform: "PAYPAL",
-        paymentId:orderId,
-        date:new Date().toISOString(),
-        chips:selectedChip.amount
-      }
-      await axios.post('https://royalback-f340.onrender.com/newpay',pay );
+        paymentId: orderId, // Usa orderId directamente, no lo conviertas a número
+        date: new Date().toISOString(),
+        chips: selectedChip.amount,
+        price: selectedChip.basePrice
+    };
+    console.log(pay);
+    
+    await axios.post('https://royalback-f340.onrender.com/newpay', pay);
       // Notificar al usuario sobre el éxito del pago
       alert(`Pago exitoso. Se acreditaron ${selectedChip.amount} chips.`);
       closeModal();
