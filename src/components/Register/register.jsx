@@ -46,7 +46,7 @@ const RegistroForm = ({ onSwitchForm }) => {
 
     useEffect(() => {
         dispatch(promo1millon());
-        
+         
     }, [dispatch]);
 
     const handleInputChange = (e) => {
