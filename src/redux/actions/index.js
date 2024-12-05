@@ -40,7 +40,6 @@ export const getUserByEmail = (email) => {
             })
         } catch (error) {
             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
-
             throw new Error(`Error de sesion: ${error.message}`)
         }
     };
@@ -65,7 +64,6 @@ export const getUserByNick = (nick, password, auth) => {
             })
         } catch (error) {
             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
-
             throw new Error(`Error de sesion: ${error.message}`)
         }
     };
@@ -123,7 +121,6 @@ export const administrarUser = (nick) => {
             })
         } catch (error) {
             /* throw new Error(error.response.data.error); */  //COMENTADO HASTA QUE RECIBA ALGO DEL BACK
-
             throw new Error(`Error de sesion: ${error.message}`)
         }
     };
