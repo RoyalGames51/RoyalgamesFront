@@ -15,6 +15,7 @@ import regaloBienvenida from '../src/assets/regalobienvenida.png';
 import { useSelector, useDispatch } from 'react-redux';
 import TermsAndConditions from './components/termsyConds/terminosYCondiciones';
 import axios from 'axios';
+import Diamantes from './components/Juegos/Diamantes/diamantes';
 
 
 function App() {
@@ -68,6 +69,7 @@ function App() {
           <Route path="/panel" element={<Panel />} />
           <Route path="/noticias" element={<News />} />
           <Route path="/terminos-y-condiciones" element={<TermsAndConditions />} />
+          <Route path="/play/diamantes" element={<Diamantes />} />
         </Routes>
         <Footer />
         {/* Modal o Cartel de Bienvenida */}

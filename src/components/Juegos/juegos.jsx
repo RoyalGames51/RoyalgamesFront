@@ -39,7 +39,7 @@ export default function GameGrid() {
           { src: juego1, path: "/loteria-instantanea", alt: "Lotería" },
           { src: juego2, path: "/ruleta", alt: "Ruleta" },
           { src: juego3, path: "/bingo", alt: "Bingo" },
-          { src: juego4, path: "/minas", alt: "Minas" },
+          { src: juego4, path: "/play/diamantes", alt: "Minas" },
         ].map((game, index) => (
           <Box
             key={index}
