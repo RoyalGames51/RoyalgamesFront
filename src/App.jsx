@@ -62,7 +62,7 @@ function App() {
         <Nav />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/perfil" element={<Perfil />} />
+          <Route path="/perfil/:tab?" element={<Perfil />} />
           <Route path="/juegos" element={<GameGrid />} />
           <Route path="/chips" element={<BuyChips />} />
           <Route path="/logout" element={<LogOut />} />
