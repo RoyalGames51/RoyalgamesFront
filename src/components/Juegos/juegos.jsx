@@ -48,7 +48,7 @@ export default function GameGrid() {
           { id: 1, src: juego1, path: "/loteria-instantanea", alt: "Lotería" },
           { id: 2, src: juego2, path: "/ruleta", alt: "Ruleta" },
           { id: 3, src: juego3, path: "/bingo", alt: "Bingo" },
-          { id: 4, src: juego4, path: "/play/diamantes", alt: "Diamantes" },
+          { id: 4, src: juego4, path: "/play/minas", alt: "Minas" },
         ].map((game) => {
           const isFavorite = favoriteGames.some((favGame) => favGame.id === game.id); // Validación de favoritos
 
