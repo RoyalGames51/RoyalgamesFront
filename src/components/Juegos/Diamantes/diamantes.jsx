@@ -13,7 +13,7 @@ const Diamantes = () => {
   return (
     <Box
       w="100%"
-      h="100%"
+      h="100vh"
       bg="gray.900"
       display="flex"
       justifyContent="center"
