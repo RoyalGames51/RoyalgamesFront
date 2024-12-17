@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Container, Box, Image, Button } from '@chakra-ui/react';
+import { useLocation } from 'react-router-dom';
 import Nav from './components/Nav/nav';
 import Footer from './components/footer/footer';
 import { Route, Routes } from 'react-router-dom';
@@ -17,27 +18,24 @@ import TermsAndConditions from './components/termsyConds/terminosYCondiciones';
 import axios from 'axios';
 import Diamantes from './components/Juegos/Diamantes/diamantes';
 
-
 function App() {
   const [showWelcomeGift, setShowWelcomeGift] = useState(false);
   const { currentUser } = useSelector((state) => state);
   const dispatch = useDispatch();
+  const location = useLocation(); // Hook para obtener la ubicación actual
 
   useEffect(() => {
     const checkWelcomeGift = async () => {
       if (currentUser?.id && !currentUser.firstChips) {
-        // Mostrar el regalo después de 2.5 segundos
         const timer = setTimeout(() => setShowWelcomeGift(true), 2500);
 
         try {
-          // Actualizar `firstChips` en el backend
           await axios.put('https://royalback-f340.onrender.com/firstchips', { id: currentUser.id });
-
         } catch (error) {
           console.error('Error actualizando firstChips:', error);
         }
 
-        return () => clearTimeout(timer); // Limpiar el temporizador
+        return () => clearTimeout(timer);
       }
     };
 
@@ -47,6 +45,9 @@ function App() {
   const handleCloseGift = () => {
     setShowWelcomeGift(false);
   };
+
+  // Determinar si el footer debe mostrarse
+  const shouldShowFooter = !location.pathname.includes('/play');
 
   return (
     <Container
@@ -69,10 +70,9 @@ function App() {
           <Route path="/panel" element={<Panel />} />
           <Route path="/noticias" element={<News />} />
           <Route path="/terminos-y-condiciones" element={<TermsAndConditions />} />
-          <Route path="/play/diamantes" element={<Diamantes />} />
+          <Route path="/play/minas" element={<Diamantes />} />
         </Routes>
-        <Footer />
-        {/* Modal o Cartel de Bienvenida */}
+        {shouldShowFooter && <Footer />}
         {showWelcomeGift && currentUser?.id && (
           <Box
             position="fixed"
@@ -89,7 +89,7 @@ function App() {
           >
             <Image src={regaloBienvenida} alt="Regalo de bienvenida" mb={4} />
             <Box fontSize="2xl" fontWeight="bold">¡Felicidades!</Box>
-            <Box>Has ganado 1,000,000 de fichas por ser uno de los primeros 1000 usuarios.</Box>
+            <Box>Has ganado 1,000,000 de fichas por ser uno de los primeros 100 usuarios.</Box>
             <Button mt={4} colorScheme="teal" onClick={handleCloseGift}>
               ¡Gracias!
             </Button>
