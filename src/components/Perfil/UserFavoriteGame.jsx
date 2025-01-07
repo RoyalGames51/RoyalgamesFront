@@ -12,7 +12,7 @@ const UserFavoriteGame = ({ games, onToggleFavorite }) => {
 
   return (
     <Grid templateColumns="repeat(auto-fit, minmax(150px, 1fr))" gap={4}>
-      {games.map((game, index) => (
+      {games?.map((game, index) => (
         <Box
           key={index}
           bg="gray.200"

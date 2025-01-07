@@ -45,10 +45,10 @@ export default function GameGrid() {
 
       <Grid templateColumns="repeat(auto-fit, minmax(230px, 1fr))" gap="30px">
         {[
-          { id: 1, src: juego1, path: "/loteria-instantanea", alt: "Lotería" },
-          { id: 2, src: juego2, path: "/ruleta", alt: "Ruleta" },
-          { id: 3, src: juego3, path: "/bingo", alt: "Bingo" },
-          { id: 4, src: juego4, path: "/play/diamantes", alt: "Diamantes" },
+          { id: "92428f1e-9567-48e6-a95c-b8d85c7c5f2f", src: juego1, path: "/loteria-instantanea", alt: "Lotería" },
+          { id: "30c4250c-03d7-474f-a57a-00edadd0e34f" , src: juego2, path: "/ruleta", alt: "Ruleta" },
+          { id: "9ffe0ebe-6927-411e-bac6-d91c4292f84a", src: juego3, path: "/bingo", alt: "Bingo" },
+          { id: "9a2c1a3c-f66c-4dd7-b3f4-e10e46d01e30", src: juego4, path: "/play/diamantes", alt: "Diamantes"},
         ].map((game) => {
           const isFavorite = favoriteGames.some((favGame) => favGame.id === game.id); // Validación de favoritos
 
