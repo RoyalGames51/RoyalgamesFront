@@ -13,9 +13,10 @@ import {
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
+import { useMemo, useEffect} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import chips from "../../assets/chips.png";
-import { cleanCurrentUser } from "../../redux/actions";
+import { cleanCurrentUser , fetchFavoriteGames} from "../../redux/actions";
 import { useAuth } from "../../context/oauthContext";
 import Swal from "sweetalert2";
 import Select from 'react-select';
@@ -23,9 +24,13 @@ import Select from 'react-select';
 
 export default function UserZone() {
     const { currentUser } = useSelector((state) => state);
+    const memoizedUser = useMemo(() => currentUser, [currentUser]);
     const auth = useAuth();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    
+
+
 
     // const options = [
     //     { value: 'perfil', label: 'Perfil' },
@@ -130,17 +135,20 @@ export default function UserZone() {
             borderColor="gray.600"
             bgGradient="linear(to-b, #2e2e2e, black)"
         >
-            {currentUser?.id ? (
+            {console.log('mem', memoizedUser)}
+            {console.log('curr', currentUser)}
+            {memoizedUser?.id ? (
                 <>
-                    <Avatar src={currentUser.avatar} />
+                    <Avatar src={memoizedUser.avatar} />
+                    
                     <Stack spacing={0} ml={3}>
                         <Text fontWeight="bold" color="white">
-                            {currentUser.nick.charAt(0).toUpperCase() + currentUser.nick.slice(1)}
+                            {memoizedUser.nick.charAt(0).toUpperCase() + memoizedUser.nick.slice(1)}
                         </Text>
                         <Flex align="center" color="gray.300">
   <Image src={chips} alt="Chips" boxSize="1em" mr={2} />
   <Text whiteSpace="nowrap">
-  {new Intl.NumberFormat('en-US').format(currentUser.chips).replace(/,/g, ' ')} fichas
+  {new Intl.NumberFormat('en-US').format(memoizedUser.chips).replace(/,/g, ' ')} fichas
 </Text>
 </Flex>
 

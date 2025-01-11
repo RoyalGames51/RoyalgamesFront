@@ -9,11 +9,11 @@ import {
 
 
 const initialState = {
-    favoriteGames: [],
+    favoriteGames:[],
     games: [],
     loading: false,
     error: null,
-    currentUser: {},
+    currentUser: [],
     administradorUser: {},
     counterUser: {}
 }
@@ -67,7 +67,7 @@ const reducer = (state = initialState, action) => {
 
         case CREATE_GAME_FAILURE:
             return { ...state, loading: false, error: action.payload };
-            
+
         case ADMINISTRAR_USER:
             return {
                 ...state,
@@ -80,11 +80,21 @@ const reducer = (state = initialState, action) => {
             }
 
         case FETCH_FAVORITES_SUCCESS:
-            return { ...state, favoriteGames: action.payload, loading: false };
+            return {
+                ...state,
+                favoriteGames: action.payload,
+            };
         case FETCH_FAVORITES_FAILURE:
             return { ...state, error: action.payload, loading: false };
         case ADD_FAVORITE_SUCCESS:
-            return { ...state, favoriteGames: [...state.favoriteGames, action.payload] };
+            // Evitar duplicados
+            if (state.favoriteGames.find((game) => game.id === action.payload.id)) {
+                return state;
+            }
+            return {
+                ...state,
+                favoriteGames: [...state.favoriteGames, action.payload],
+            };
         case REMOVE_FAVORITE_SUCCESS:
             return {
                 ...state,

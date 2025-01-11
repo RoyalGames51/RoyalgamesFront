@@ -1,6 +1,6 @@
 import { ADMINISTRAR_USER, CLEAN_USER_BY_EMAIL, PROMO1K, USER_BY_EMAIL, USER_BY_NICK, FETCH_USER_PROFILE,
     UPDATE_USER_PROFILE,
-    USER_ACTION_ERROR, REMOVE_FAVORITE_SUCCESS, ADD_FAVORITE_SUCCESS, FETCH_FAVORITES_FAILURE, FETCH_FAVORITES_SUCCESS } from "./action.types";
+    USER_ACTION_ERROR, REMOVE_FAVORITE_SUCCESS, ADD_FAVORITE_SUCCESS, ADD_FAVORITE_FAILURE, REMOVE_FAVORITE_FAILURE, FETCH_FAVORITES_FAILURE, FETCH_FAVORITES_SUCCESS } from "./action.types";
 import axios from 'axios'
 
 
@@ -152,7 +152,14 @@ export const promo1millon = () => {
 export const fetchFavoriteGames = (userId) => async (dispatch) => {
     try {
         const response = await axios.get(`${API_BASE_URL}/favorites/${userId}`);
-        dispatch({ type: FETCH_FAVORITES_SUCCESS, payload: response.data });
+        const favoriteGamesIds = response.data;
+
+        console.log('Juegos favoritos:', favoriteGamesIds);
+    
+        dispatch({
+          type: FETCH_FAVORITES_SUCCESS,
+          payload: favoriteGamesIds, // Asegúrate de que esto sea un array de IDs
+        });
     } catch (error) {
         console.error("Error fetching favorite games:", error);
         dispatch({ type: FETCH_FAVORITES_FAILURE, payload: error.message });
@@ -163,7 +170,11 @@ export const fetchFavoriteGames = (userId) => async (dispatch) => {
 export const addFavoriteGame = (userId, gameId) => async (dispatch) => {
     try {
         const response = await axios.post(`${API_BASE_URL}/favorites`, { userId, gameId });
-        dispatch({ type: ADD_FAVORITE_SUCCESS, payload: response.data });
+        console.log('estoy despach fav')
+        dispatch({ type: ADD_FAVORITE_SUCCESS, payload: response.data }
+
+        );
+        dispatch(fetchFavoriteGames(userId));
     } catch (error) {
         console.error("Error adding favorite game:", error);
         dispatch({ type: ADD_FAVORITE_FAILURE, payload: error.message });
@@ -173,8 +184,10 @@ export const addFavoriteGame = (userId, gameId) => async (dispatch) => {
 // Acción para eliminar un juego de favoritos
 export const removeFavoriteGame = (userId, gameId) => async (dispatch) => {
     try {
-        await axios.delete(`${API_BASE_URL}/favorites/${userId}/${gameId}`);
+        const response= await axios.delete(`${API_BASE_URL}/favorites/${userId}/${gameId}`);
         dispatch({ type: REMOVE_FAVORITE_SUCCESS, payload: gameId });
+        dispatch(fetchFavoriteGames(userId))
+        console.log('remueve', response.data )
     } catch (error) {
         console.error("Error removing favorite game:", error);
         dispatch({ type: REMOVE_FAVORITE_FAILURE, payload: error.message });
@@ -187,6 +200,7 @@ export const createGame = (gameData) => async (dispatch) => {
     try {
       const response = await axios.post(`${API_BASE_URL}/game/create`, gameData);
       dispatch({ type: CREATE_GAME_SUCCESS, payload: response.data });
+      
     } catch (error) {
       dispatch({ type: CREATE_GAME_FAILURE, payload: error.message });
     }

@@ -47,11 +47,11 @@ pt={"10%"}
             <Flex flexDirection='column' fontSize='1.3rem' textAlign="left">
               <Text textAlign="left" >
                 <Heading fontSize="x-large" textAlign="left" mb={4}>Nuestras redes:</Heading>
-                <div>
+                <Text as="span">
                   <Text mb={2}> Facebook</Text>
                   <Text mb={2}> Instagram</Text>
                   <Text mb={2}> X </Text>
-                </div>
+                </Text>
               </Text>
             </Flex>
           </Box>
