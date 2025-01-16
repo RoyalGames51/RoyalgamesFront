@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Box, Avatar, Text, Flex, Spinner } from "@chakra-ui/react";
+import { Box, Avatar, Text, Flex, Spinner, Link } from "@chakra-ui/react";
+import { Link as RouterLink } from "react-router-dom";
 import axios from "axios";
 
 export default function UserList() {
@@ -41,7 +42,6 @@ export default function UserList() {
       p="4"
       ml="3%"
       boxShadow="md"
-      
     >
       {loading ? (
         <Flex justify="center" align="center" h="100%">
@@ -49,28 +49,35 @@ export default function UserList() {
         </Flex>
       ) : (
         users.map((user) => (
-          <Flex
-            key={user.id} // Asegúrate de que cada usuario tenga una propiedad única como `id`
-            align="center"
-            p="3"
-            mb="2"
-            bg="white"
-            borderRadius="md"
-            boxShadow="sm"
+          <Link
+            as={RouterLink}
+            to={`/perfil/${user.nick}`}
+            key={user.id}
+            _hover={{ textDecoration: "none" }}
           >
-            <Avatar
-              size="md"
-              name={user.nick}
-              src={user.avatar} // Asegúrate de que el backend envíe la URL del avatar
-              mr="3"
-            />
-            <Box>
-              <Text fontWeight="bold">{user.nick.charAt(0).toUpperCase() + user.nick.slice(1)}</Text>
-              <Text fontSize="sm" color="gray.500">
-                Jugando
-              </Text>
-            </Box>
-          </Flex>
+            <Flex
+              align="center"
+              p="3"
+              mb="2"
+              bg="white"
+              borderRadius="md"
+              boxShadow="sm"
+              _hover={{ bg: "gray.200", cursor: "pointer" }}
+            >
+              <Avatar
+                size="md"
+                name={user.nick}
+                src={user.avatar || "https://via.placeholder.com/150"} // Asegúrate de que el backend envíe la URL del avatar
+                mr="3"
+              />
+              <Box>
+                <Text fontWeight="bold">{user.nick.charAt(0).toUpperCase() + user.nick.slice(1)}</Text>
+                <Text fontSize="sm" color="gray.500">
+                  Jugando
+                </Text>
+              </Box>
+            </Flex>
+          </Link>
         ))
       )}
     </Box>

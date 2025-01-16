@@ -1,44 +1,31 @@
 import {
-    USER_BY_EMAIL, CLEAN_USER_BY_EMAIL, USER_BY_NICK, ADMINISTRAR_USER, PROMO1K, REMOVE_FAVORITE_SUCCESS, ADD_FAVORITE_SUCCESS, FETCH_FAVORITES_FAILURE, FETCH_FAVORITES_SUCCESS, FETCH_USER_PROFILE,
-    UPDATE_USER_PROFILE,
-    USER_ACTION_ERROR,
-    CREATE_GAME_REQUEST,
-    CREATE_GAME_SUCCESS,
-    CREATE_GAME_FAILURE,
+    USER_BY_EMAIL, CLEAN_USER_BY_EMAIL, USER_BY_NICK, ADMINISTRAR_USER, PROMO1K, FETCH_PUBLIC_FAVORITES, REMOVE_FAVORITE_SUCCESS, ADD_FAVORITE_SUCCESS, FETCH_FAVORITES_FAILURE, FETCH_FAVORITES_SUCCESS, FETCH_USER_PROFILE,
+    UPDATE_USER_PROFILE, USER_ACTION_ERROR, CREATE_GAME_REQUEST, CREATE_GAME_SUCCESS, CREATE_GAME_FAILURE, VIEW_USER_PROFILE
 } from "../actions/action.types";
 
-
 const initialState = {
-    favoriteGames:[],
+    favoriteGames: [],
+    publicFavorites:[],
     games: [],
     loading: false,
     error: null,
-    currentUser: [],
+    currentUser: null,
+    viewedUserProfile: [], // Nuevo estado para perfiles públicos
     administradorUser: {},
-    counterUser: {}
-}
+    counterUser: {},
+};
+
 const reducer = (state = initialState, action) => {
-    //DESDE ACA MANEJA LA CANT DE OBJETO POR PAGINA
-
     switch (action.type) {
-
+        // Manejo de usuario actual
         case CLEAN_USER_BY_EMAIL:
             return {
                 ...state,
-                currentUser: action.payload
-            }
-
+                currentUser: null,
+            };
 
         case USER_BY_EMAIL:
-            return {
-                ...state,
-                currentUser: action.payload
-            }
         case USER_BY_NICK:
-            return {
-                ...state,
-                currentUser: action.payload
-            }
         case FETCH_USER_PROFILE:
             return {
                 ...state,
@@ -49,9 +36,17 @@ const reducer = (state = initialState, action) => {
         case UPDATE_USER_PROFILE:
             return {
                 ...state,
-                currentUser: action.payload, // Actualiza los datos del usuario
+                currentUser: action.payload,
                 error: null,
             };
+
+        case VIEW_USER_PROFILE:
+            return {
+                ...state,
+                viewedUserProfile: action.payload,
+                
+            };
+
 
         case USER_ACTION_ERROR:
             return {
@@ -59,6 +54,7 @@ const reducer = (state = initialState, action) => {
                 error: action.payload,
             };
 
+        // Manejo de juegos
         case CREATE_GAME_REQUEST:
             return { ...state, loading: true };
 
@@ -68,45 +64,50 @@ const reducer = (state = initialState, action) => {
         case CREATE_GAME_FAILURE:
             return { ...state, loading: false, error: action.payload };
 
+        // Administración de usuarios
         case ADMINISTRAR_USER:
             return {
                 ...state,
-                administradorUser: action.payload
-            }
+                administradorUser: action.payload,
+            };
+
         case PROMO1K:
             return {
                 ...state,
-                counterUser: action.payload
-            }
+                counterUser: action.payload,
+            };
 
+        // Manejo de favoritos
         case FETCH_FAVORITES_SUCCESS:
             return {
                 ...state,
                 favoriteGames: action.payload,
             };
+
         case FETCH_FAVORITES_FAILURE:
             return { ...state, error: action.payload, loading: false };
+        
+            case FETCH_PUBLIC_FAVORITES:
+                return {
+                    ...state,
+                    publicFavorites: action.payload,
+                };    
+
         case ADD_FAVORITE_SUCCESS:
-            // Evitar duplicados
-            if (state.favoriteGames.find((game) => game.id === action.payload.id)) {
-                return state;
-            }
             return {
                 ...state,
-                favoriteGames: [...state.favoriteGames, action.payload],
+                favoriteGames: action.payload,
             };
+
         case REMOVE_FAVORITE_SUCCESS:
             return {
                 ...state,
-                favoriteGames: state.favoriteGames.filter(
-                    (game) => game.id !== action.payload
-                ),
+                favoriteGames: state.favoriteGames.filter((game) => game.id !== action.payload),
             };
 
         default:
-            return { ...state };
+            return state;
     }
-}
+};
 
-
-export default reducer
+export default reducer;

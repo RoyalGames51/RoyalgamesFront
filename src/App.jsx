@@ -63,7 +63,9 @@ function App() {
         <Nav />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/perfil/:tab?" element={<Perfil />} />
+        
+        <Route path="/perfil" element={<Perfil />} /> {/* Perfil propio */}
+        <Route path="/perfil/:userNick" element={<Perfil isPublic={true} />} /> {/* Perfil público */}
           <Route path="/juegos" element={<GameGrid />} />
           <Route path="/chips" element={<BuyChips />} />
           <Route path="/logout" element={<LogOut />} />
