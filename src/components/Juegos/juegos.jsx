@@ -14,7 +14,7 @@ const GAMES = [
   { id: "410a5d65-9ddc-410e-8a46-7c24f7029fd7", src: juego1, path: "/loteria-instantanea", alt: "Lotería" },
   { id: "628c2c5b-7b87-4bc5-893b-c81cbdd0f849", src: juego2, path: "/ruleta", alt: "Ruleta" },
   { id: "6cbe1c81-a7de-410c-8753-66ac8791c208", src: juego3, path: "/bingo", alt: "Bingo" },
-  { id: "3d18f6fa-cf8e-4c36-af46-abed4395799a", src: juego4, path: "/play/diamantes", alt: "Diamantes" },
+  { id: "3d18f6fa-cf8e-4c36-af46-abed4395799a", src: juego4, path: "/play/minas", alt: "Minas" },
 ];
 
 export default function GameGrid({ onlyFavorites = false, isPublicProfile = false }) {
