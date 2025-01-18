@@ -9,7 +9,7 @@ import {
     Link,
     Stack,
     Text,
-    Flex,Image,
+    Flex, Image,
     Box,
     Checkbox,
     IconButton
@@ -42,14 +42,14 @@ const RegistroForm = ({ onSwitchForm }) => {
         nick: "",
         email: "",
         password: "",
-        sexo:"",
+        sexo: "",
     });
 
-    
+
 
     useEffect(() => {
         dispatch(promo1millon());
-         
+
     }, [dispatch]);
 
     const handleInputChange = (e) => {
@@ -78,16 +78,16 @@ const RegistroForm = ({ onSwitchForm }) => {
         }
 
         try {
-           
+
             const [registerResponse, userResponse] = await Promise.all([
                 auth.register(input.email, input.password),
                 axios.post(`https://royalback-f340.onrender.com/user-create`, input)
-                
+
             ]);
-      
+
             const id = userResponse?.data?.id;
             console.log("id", id);
-            
+
             if (countUsers < 1000 && id) {
                 await axios.put('https://royalback-f340.onrender.com/add/chips', {
                     id: id,
@@ -142,44 +142,44 @@ const RegistroForm = ({ onSwitchForm }) => {
 
             {isRegisterOpen && (
                 <>
-                <form onSubmit={handleSubmit}>
-                    {/* Fondo oscuro */}
-                    <Box
-                        position="fixed"
-                        top="0"
-                        left="0"
-                        width="100vw"
-                        height="100vh"
-                        bg="rgba(0, 0, 0, 0.6)" // Fondo oscuro con opacidad
-                        zIndex="9"
-                        onClick={toggleRegisterBox} // Cerrar al hacer clic en el fondo
-                    />
-                    
-                     <Flex
-                        position="fixed"
-                        top="50%"
-                        left="50%"
-                        transform="translate(-50%, -50%)"
-                        bg="white"
-                        
-                        boxShadow="2xl"
-                        borderRadius="15px"
-                        width="700px"
-                        zIndex="10"
-                        align="center"
-                        direction={"column"}
-                    >
-                        {/* Imagen al lado izquierdo */}
+                    <form onSubmit={handleSubmit}>
+                        {/* Fondo oscuro */}
                         <Box
-                            bg="#13d500"
-                            color="white"
-                            width="100%"
-                            textAlign="center"
-                            py={2}
-                            borderTopRadius="15px"
+                            position="fixed"
+                            top="0"
+                            left="0"
+                            width="100vw"
+                            height="100vh"
+                            bg="rgba(0, 0, 0, 0.6)" // Fondo oscuro con opacidad
+                            zIndex="9"
+                            onClick={toggleRegisterBox} // Cerrar al hacer clic en el fondo
+                        />
+
+                        <Flex
+                            position="fixed"
+                            top="50%"
+                            left="50%"
+                            transform="translate(-50%, -50%)"
+                            bg="white"
+
+                            boxShadow="2xl"
+                            borderRadius="15px"
+                            width="700px"
+                            zIndex="10"
+                            align="center"
+                            direction={"column"}
                         >
-                            <Text fontSize="1xl" fontWeight="bold">Regístrate en la mejor pagina de juegos online</Text>
-                            {/* <IconButton
+                            {/* Imagen al lado izquierdo */}
+                            <Box
+                                bg="#13d500"
+                                color="white"
+                                width="100%"
+                                textAlign="center"
+                                py={2}
+                                borderTopRadius="15px"
+                            >
+                                <Text fontSize="1xl" fontWeight="bold">Regístrate en la mejor pagina de juegos online</Text>
+                                {/* <IconButton
                             position="absolute"
                             top="10px"
                             right="10px"
@@ -189,120 +189,126 @@ const RegistroForm = ({ onSwitchForm }) => {
                             bg="transparent"
                             _hover={{ bg: "red.100" }}
                         /> */}
-                        </Box>
-                        <Flex width="100%" p="30px">
-                    {/* Formulario de registro */}
-                    <Box
-                      flex={2}
-                      bgColor={"gray.100"}
-                      borderRadius={"20px"}
-                      p={2}
-                      border={"1px"}
-                      borderColor={"gray.300"}
-                    >
-                        {/* Botón de cerrar */}
-                       
-
-                        <Stack spacing={4} pt={"10px"}>
-                            
-
-                            <FormControl isInvalid={errors.nick}>
-                                
-                                <Input
-                                    placeholder="Nombre de usuario"
-                                    type="text"
-                                    name="nick"
-                                    value={input.nick}
-                                    onChange={handleInputChange}
+                            </Box>
+                            <Flex width="100%" p="30px">
+                                {/* Formulario de registro */}
+                                <Box
+                                    flex={2}
+                                    bgColor={"gray.100"}
+                                    borderRadius={"20px"}
+                                    p={2}
                                     border={"1px"}
                                     borderColor={"gray.300"}
-                                    borderRadius={"20px"}
-                                />
-                                {errors.nick && <Text color="red.500">{errors.nick}</Text>}
-                            </FormControl>
+                                >
+                                    {/* Botón de cerrar */}
 
-                            <FormControl isInvalid={errors.email}>
-                                
-                                <Input
-                                    placeholder="Correo electrónico"
-                                    type="email"
-                                    name="email"
-                                    value={input.email}
-                                    onChange={handleInputChange}
-                                    border={"1px"}
-                                    borderColor={"gray.300"}
-                                    borderRadius={"20px"}
-                                />
-                                {errors.email && <Text color="red.500">{errors.email}</Text>}
-                            </FormControl>
 
-                            <FormControl isInvalid={errors.password}>
-                                
-                                <Input
-                                    placeholder="Contraseña"
-                                    type="password"
-                                    name="password"
-                                    value={input.password}
-                                    onChange={handleInputChange}
-                                    border={"1px"}
-                                    borderColor={"gray.300"}
-                                    borderRadius={"20px"}
-                                />
-                                {errors.password && <Text color="red.500">{errors.password}</Text>}
-                            </FormControl>
-                            <FormControl isInvalid={errors.sexo}>
-                                            <Text fontSize="sm" mb={2}>Seleccione su género:</Text>
-                                            <Select
-                                                placeholder="Selecciona tu género"
-                                                name="sexo"
-                                                value={input.sexo}
+                                    <Stack spacing={4} pt={"10px"}>
+
+
+                                        <FormControl isInvalid={errors.nick}>
+
+                                            <Input
+                                                placeholder="Nombre de usuario"
+                                                type="text"
+                                                name="nick"
+                                                value={input.nick}
                                                 onChange={handleInputChange}
+                                                border={"1px"}
                                                 borderColor={"gray.300"}
                                                 borderRadius={"20px"}
-                                            >
-                                                <option value="H">Hombre</option>
-                                                <option value="M">Mujer</option>
-                                            </Select>
+                                            />
+                                            {errors.nick && <Text color="red.500">{errors.nick}</Text>}
+                                        </FormControl>
+
+                                        <FormControl isInvalid={errors.email}>
+
+                                            <Input
+                                                placeholder="Correo electrónico"
+                                                type="email"
+                                                name="email"
+                                                value={input.email}
+                                                onChange={handleInputChange}
+                                                border={"1px"}
+                                                borderColor={"gray.300"}
+                                                borderRadius={"20px"}
+                                            />
+                                            {errors.email && <Text color="red.500">{errors.email}</Text>}
+                                        </FormControl>
+
+                                        <FormControl isInvalid={errors.password}>
+
+                                            <Input
+                                                placeholder="Contraseña"
+                                                type="password"
+                                                name="password"
+                                                value={input.password}
+                                                onChange={handleInputChange}
+                                                border={"1px"}
+                                                borderColor={"gray.300"}
+                                                borderRadius={"20px"}
+                                            />
+                                            {errors.password && <Text color="red.500">{errors.password}</Text>}
+                                        </FormControl>
+                                        <FormControl isInvalid={errors.sexo}>
+                                            <Text fontSize="sm" mb={2}>Seleccione su género:</Text>
+                                            <Select
+                                                options={[
+                                                    { value: 'H', label: 'Hombre' },
+                                                    { value: 'M', label: 'Mujer' },
+                                                ]}
+                                                placeholder="Selecciona tu género"
+                                                onChange={(selectedOption) =>
+                                                    setInput({ ...input, sexo: selectedOption?.value || '' })
+                                                }
+                                                styles={{
+                                                    control: (provided) => ({
+                                                        ...provided,
+                                                        borderColor: 'gray.300',
+                                                        borderRadius: '20px',
+                                                    }),
+                                                }}
+                                            />
                                             {errors.sexo && <Text color="red.500">{errors.sexo}</Text>}
                                         </FormControl>
 
-                            <Checkbox
-    isChecked={isTermsChecked}
-    onChange={(e) => setIsTermsChecked(e.target.checked)}
->
-    <Flex align="center">
-        <Text fontSize="12px">He leído y acepto los{" "}</Text>
-        <Link
-            color="blue.500"
-            onClick={() => navigate("/terminos-y-condiciones")}
-            textDecoration="underline"
-            fontSize="12px"
-            ml="1"
-        >
-            términos y condiciones
-        </Link>
-    </Flex>
-</Checkbox>
+                                        <Checkbox
+                                            isChecked={isTermsChecked}
+                                            onChange={(e) => setIsTermsChecked(e.target.checked)}
+                                        >
+                                            <Flex align="center">
+                                                <Text fontSize="12px">He leído y acepto los{" "}</Text>
+                                                <Link
+                                                    color="blue.500"
+                                                    onClick={() => navigate("/terminos-y-condiciones")}
+                                                    textDecoration="underline"
+                                                    fontSize="12px"
+                                                    ml="1"
+                                                >
+                                                    términos y condiciones
+                                                </Link>
+                                            </Flex>
+                                        </Checkbox>
 
-                            <Button
-                                colorScheme="teal"
-                                variant="solid"
-                                width="100%"
-                                type="submit"
-                                isDisabled={!isTermsChecked}
-                            >
-                                Registrarse
-                            </Button>
-                            
-                        </Stack>
-                        
-                    </Box>
-                    <Box flex="2" pl="20px" >
-                            <Image src={registroimg} alt="Registro" boxSize="100%" borderRadius={"30px"}/>
-                        </Box>
-                    </Flex>
-                    </Flex>
-                    </form> 
+                                        <Button
+                                            colorScheme="teal"
+                                            variant="solid"
+                                            width="100%"
+                                            type="submit"
+                                            isDisabled={!isTermsChecked}
+                                        >
+                                            Registrarse
+                                        </Button>
+
+                                    </Stack>
+
+                                </Box>
+                                <Box flex="2" pl="20px" >
+                                    <Image src={registroimg} alt="Registro" boxSize="100%" borderRadius={"30px"} />
+                                </Box>
+                            </Flex>
+                        </Flex>
+                    </form>
                 </>
             )}
         </Box>
