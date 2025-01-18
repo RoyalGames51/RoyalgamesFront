@@ -104,31 +104,43 @@ useEffect(() => {
   // Capturar orden de PayPal
   const handleApprove = async (data, actions) => {
     try {
-      // Acreditar fichas directament
+      // Capturar el pago en el backend
       const orderId = data.orderID;
+      const captureResponse = await axios.post('https://royalback-f340.onrender.com/capture-paypal-order', {
+        orderId: orderId, // Enviar el ID de la orden al backend
+      });
+  
+      // Verifica que la captura haya sido exitosa
+      if (captureResponse.data.status !== 'COMPLETED') {
+        throw new Error('La captura del pago no se completó correctamente');
+      }
+  
+      // Acreditar fichas directamente
       await axios.put('https://royalback-f340.onrender.com/add/chips', {
         id: currentUser?.id,
         newChips: selectedChip.amount,
       });
+  
+      // Registrar el pago en el historial (opcional)
       const pay = {
         userId: currentUser?.id,
         paymentPlataform: "PAYPAL",
-        paymentId: orderId, // Usa orderId directamente, no lo conviertas a número
+        paymentId: orderId, // Usa orderId directamente
         date: new Date().toISOString(),
         chips: selectedChip.amount,
-        price: selectedChip.basePrice
-    };
-    console.log(pay);
-    
-    await axios.post('https://royalback-f340.onrender.com/newpay', pay);
-      // Notificar al usuario sobre el éxito del pago
-      alert(`Pago exitoso. Se acreditaron ${selectedChip.amount} chips.`);
-      closeModal();
-    } catch (error) {
-      console.error("Error al procesar el pago:", error);
-      alert("Hubo un problema al procesar el pago.");
+        price: selectedChip.basePrice,
+      };
+  
+      await axios.post('https://royalback-f340.onrender.com/register-payment', pay);
+  
+      // Mostrar mensaje de éxito al usuario
+      alert('¡Pago completado y fichas acreditadas!');
+    } catch (err) {
+      console.error('Error en el manejo de la aprobación:', err);
+      alert('Hubo un problema con el pago. Por favor, inténtalo de nuevo.');
     }
   };
+  
 
 
   // MercadoPago
