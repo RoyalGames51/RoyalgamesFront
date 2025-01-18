@@ -259,7 +259,7 @@ const RegistroForm = ({ onSwitchForm }) => {
                                                 borderRadius={"20px"}
                                             >
                                                 <option value="H">Hombre</option>
-                                                <option value="M">Mujer</option>
+                                                <option value="H">Mujer</option>
                                             </Select>
                                             {errors.sexo && <Text color="red.500">{errors.sexo}</Text>}
                                         </FormControl>
