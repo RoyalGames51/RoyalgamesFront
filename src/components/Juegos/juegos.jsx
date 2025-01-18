@@ -7,14 +7,14 @@ import juego2 from "../../assets/ruleta.png";
 import juego3 from "../../assets/bingoproxi.png";
 import juego4 from "../../assets/minas.png";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchPublicFavorites } from "../../redux/actions"; // Asegúrate de importar correctamente tu acción
+
 
 // Lista de juegos disponibles
 const GAMES = [
-  { id: "410a5d65-9ddc-410e-8a46-7c24f7029fd7", src: juego1, path: "/loteria-instantanea", alt: "Lotería" },
-  { id: "628c2c5b-7b87-4bc5-893b-c81cbdd0f849", src: juego2, path: "/ruleta", alt: "Ruleta" },
-  { id: "6cbe1c81-a7de-410c-8753-66ac8791c208", src: juego3, path: "/bingo", alt: "Bingo" },
-  { id: "3d18f6fa-cf8e-4c36-af46-abed4395799a", src: juego4, path: "/play/minas", alt: "Minas" },
+  { id: "40cf64b9-35a2-4953-beee-ca764135337b", src: juego1, path: "/loteria-instantanea", alt: "Lotería" },
+  { id: "a438f824-2f97-492d-89ba-73e213930ecb", src: juego2, path: "/ruleta", alt: "Ruleta" },
+  { id: "02814291-c075-4b77-8105-10b912f9dd31", src: juego3, path: "/bingo", alt: "Bingo" },
+  { id: "501ffe04-71e2-44c9-a06a-f97df1babd0a", src: juego4, path: "/play/diamantes", alt: "Diamantes" },
 ];
 
 export default function GameGrid({ onlyFavorites = false, isPublicProfile = false }) {

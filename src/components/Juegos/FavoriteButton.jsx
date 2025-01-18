@@ -1,9 +1,9 @@
 import { IconButton } from "@chakra-ui/react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { addFavoriteGame, removeFavoriteGame, fetchFavoriteGames } from "../../redux/actions";
+import { addFavoriteGame, removeFavoriteGame, fetchFavoriteGames} from "../../redux/actions";
 
-export default function FavoriteButton({ gameId, isFavorite }) {
+export default function FavoriteButton({  gameId, isFavorite }) {
   const dispatch = useDispatch();
   const currentUserId = useSelector((state) => state.currentUser?.id);
 
@@ -11,9 +11,14 @@ export default function FavoriteButton({ gameId, isFavorite }) {
     if (isFavorite) {
       dispatch(removeFavoriteGame(currentUserId, gameId));
     } else {
+        
       dispatch(addFavoriteGame(currentUserId, gameId));
+      
+      
+      
     }
     dispatch(fetchFavoriteGames(currentUserId));
+ 
   };
 
   return (
