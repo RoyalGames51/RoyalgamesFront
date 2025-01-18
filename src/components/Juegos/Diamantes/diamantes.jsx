@@ -29,7 +29,7 @@ const Diamantes = () => {
         >
           <iframe
             src={gameURL}
-            title="Juego Diamantes"
+            title="Juego Minas"
             style={{
               position: "absolute",
               top: 0,
