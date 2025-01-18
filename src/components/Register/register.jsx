@@ -12,8 +12,10 @@ import {
     Flex,Image,
     Box,
     Checkbox,
-    IconButton,Select
+    IconButton
 } from "@chakra-ui/react";
+import Select from 'react-select';
+
 import { CloseIcon } from '@chakra-ui/icons'; // Ícono para el botón de cerrar
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/oauthContext";
@@ -254,7 +256,7 @@ const RegistroForm = ({ onSwitchForm }) => {
                                                 placeholder="Selecciona tu género"
                                                 name="sexo"
                                                 value={input.sexo}
-                                                onChange={(e) => setInput({ ...input, sexo: e.target.value })} 
+                                                onChange={handleInputChange}
                                                 borderColor={"gray.300"}
                                                 borderRadius={"20px"}
                                             >
