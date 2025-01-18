@@ -110,19 +110,6 @@ useEffect(() => {
         id: currentUser?.id,
         newChips: selectedChip.amount,
       });
-      const captureResponse = await axios.post('https://royalback-f340.onrender.com/capture-paypal-order', {
-        orderId: orderId, // Enviar el ID de la orden al backend
-      });
-  
-      // Verifica que la captura haya sido exitosa
-      if (captureResponse.data.status !== 'COMPLETED') {
-        throw new Error('La captura del pago no se completó correctamente');
-      }
-  
-      // Acreditar fichas directamente
-      
-  
-      // Registrar el pago en el historial (opcional)
       const pay = {
         userId: currentUser?.id,
         paymentPlataform: "PAYPAL",
@@ -131,6 +118,14 @@ useEffect(() => {
         chips: selectedChip.amount,
         price: selectedChip.basePrice,
       };
+      const captureResponse = await axios.post('https://royalback-f340.onrender.com/capture-paypal-order', {
+        orderId: orderId, // Enviar el ID de la orden al backend
+      });
+  
+    
+  
+      // Registrar el pago en el historial (opcional)
+      
   
       await axios.post('https://royalback-f340.onrender.com/register-payment', pay);
   
@@ -138,7 +133,7 @@ useEffect(() => {
       alert('¡Pago completado y fichas acreditadas!');
     } catch (err) {
       console.error('Error en el manejo de la aprobación:', err);
-      alert('Hubo un problema con el pago. Por favor, inténtalo de nuevo.');
+      
     }
   };
   
