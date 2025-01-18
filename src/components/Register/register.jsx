@@ -40,7 +40,7 @@ const RegistroForm = ({ onSwitchForm }) => {
         nick: "",
         email: "",
         password: "",
-        sexo:""
+        sexo:"",
     });
 
     
@@ -254,12 +254,12 @@ const RegistroForm = ({ onSwitchForm }) => {
                                                 placeholder="Selecciona tu género"
                                                 name="sexo"
                                                 value={input.sexo}
-                                                onChange={handleInputChange}
+                                                onChange={(e) => setInput({ ...input, sexo: e.target.value })} 
                                                 borderColor={"gray.300"}
                                                 borderRadius={"20px"}
                                             >
                                                 <option value="H">Hombre</option>
-                                                <option value="H">Mujer</option>
+                                                <option value="M">Mujer</option>
                                             </Select>
                                             {errors.sexo && <Text color="red.500">{errors.sexo}</Text>}
                                         </FormControl>
