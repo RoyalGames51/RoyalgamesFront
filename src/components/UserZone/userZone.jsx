@@ -39,32 +39,56 @@ export default function UserZone() {
     //     { value: 'logout', label: 'Cerrar sesión' },
     //   ];
 
-    const handleLogOut = async () => {
+    // const handleLogOut = async () => {
+    //     try {
+    //         await auth.logOut();
+    //         localStorage.clear();
+    //         dispatch(cleanCurrentUser());
+    //         navigate("/"); // Redirige a la página de inicio
+    //         Swal.fire({
+    //             title: "¡Sesión cerrada con éxito!",
+    //             icon: "success",
+    //         });
+    //     } catch (error) {
+    //         console.error(`Error al cerrar sesión: ${error.message}`);
+    //     }
+    // };
+    // const handleChange = async (selectedOption) => {
+    //     if (selectedOption.value === 'logout') {
+    //         await auth.logOut();
+    //         localStorage.clear();
+    //         dispatch(cleanCurrentUser());
+    //         navigate("/"); // Redirige a la página de inicio
+    //         Swal.fire({
+    //             title: "¡Sesión cerrada con éxito!",
+    //             icon: "success",
+    //         });
+    //     } else {
+    //         window.location.href = `/${selectedOption.value}`;
+    //     }
+    // };
+
+    const handleAction = async (action) => {
         try {
-            await auth.logOut();
-            localStorage.clear();
-            dispatch(cleanCurrentUser());
-            navigate("/"); // Redirige a la página de inicio
-            Swal.fire({
-                title: "¡Sesión cerrada con éxito!",
-                icon: "success",
-            });
+            if (action === "logout") {
+                await auth.logOut();
+                localStorage.clear();
+                dispatch(cleanCurrentUser());
+                Swal.fire({
+                    title: "¡Sesión cerrada con éxito!",
+                    icon: "success",
+                });
+                navigate("/"); // Redirige a la página de inicio
+            } else {
+                navigate(`/${action}`);
+            }
         } catch (error) {
-            console.error(`Error al cerrar sesión: ${error.message}`);
-        }
-    };
-    const handleChange = async (selectedOption) => {
-        if (selectedOption.value === 'logout') {
-            await auth.logOut();
-            localStorage.clear();
-            dispatch(cleanCurrentUser());
-            navigate("/"); // Redirige a la página de inicio
+            console.error(`Error al realizar la acción (${action}): ${error.message}`);
             Swal.fire({
-                title: "¡Sesión cerrada con éxito!",
-                icon: "success",
+                title: "Error",
+                text: "Hubo un problema al procesar la solicitud.",
+                icon: "error",
             });
-        } else {
-            window.location.href = `/${selectedOption.value}`;
         }
     };
     const options = [
@@ -156,14 +180,13 @@ export default function UserZone() {
 
                     {/* Menú desplegable */}
                     <Select
-
                         options={options}
-                        onChange={handleChange}
-                        placeholder="" // Deja el placeholder vacío
+                        onChange={(selectedOption) => handleAction(selectedOption.value)}
+                        placeholder=""
                         styles={customStyles}
-                        isSearchable={false} // Deshabilita la barra de búsqueda
+                        isSearchable={false}
                         components={{
-                            IndicatorSeparator: () => null, // Oculta la línea divisoria entre la flecha y el menú
+                            IndicatorSeparator: () => null,
                         }}
                     />
                 </>
