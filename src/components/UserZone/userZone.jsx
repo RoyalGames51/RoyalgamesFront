@@ -111,7 +111,7 @@ export default function UserZone() {
                         options={options}
                         onChange={(selectedOption) => {
                             if (selectedOption.value === 'logout') {
-                                // Lógica para logout
+                                navigate(`/logout`)
                             } else {
                                 navigate(`/${selectedOption.value}`);
                             }
