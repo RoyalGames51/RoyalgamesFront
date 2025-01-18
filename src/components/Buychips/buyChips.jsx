@@ -169,7 +169,7 @@ useEffect(() => {
   return (
     <PayPalScriptProvider
     options={{
-      "client-id": "AbvrEkE1DOvOa5AfxsL-MJsGmliRIZQns7xncabFORnTc4YDhH2ePOveFwia-XfzGciljQxOa3w9v_i7", // Reemplaza con tu Client ID de PayPal
+      "client-id": "Aa4WplIP-3eiZtQyyqlQqlWMsnWSM0XQ1lDtr8ijR8m-1sPggFBbuPMGShmtBuajIlbt8bn2wkOx4iQa", // Reemplaza con tu Client ID de PayPal
       currency: "USD",
     }}
   >
