@@ -12,7 +12,7 @@ import {
     Flex,Image,
     Box,
     Checkbox,
-    IconButton,
+    IconButton,Select
 } from "@chakra-ui/react";
 import { CloseIcon } from '@chakra-ui/icons'; // Ícono para el botón de cerrar
 import { useEffect, useState } from "react";
@@ -39,7 +39,8 @@ const RegistroForm = ({ onSwitchForm }) => {
     const [input, setInput] = useState({
         nick: "",
         email: "",
-        password: ""
+        password: "",
+        sexo:""
     });
 
     
@@ -64,11 +65,12 @@ const RegistroForm = ({ onSwitchForm }) => {
         const emailError = validateEmail(input.email);
         const passwordError = validatePassword(input.password);
 
-        if (nickError || emailError || passwordError) {
+        if (nickError || emailError || passwordError || !input.sexo) {
             setErrors({
                 nick: nickError || "",
                 email: emailError || "",
                 password: passwordError || "",
+                sexo: input.sexo ? "" : "Debe seleccionar un genero"
             });
             return;
         }
@@ -246,6 +248,22 @@ const RegistroForm = ({ onSwitchForm }) => {
                                 />
                                 {errors.password && <Text color="red.500">{errors.password}</Text>}
                             </FormControl>
+                            <FormControl isInvalid={errors.sexo}>
+                                            <Text fontSize="sm" mb={2}>Seleccione su género:</Text>
+                                            <Select
+                                                placeholder="Selecciona tu género"
+                                                name="sexo"
+                                                value={input.sexo}
+                                                onChange={handleInputChange}
+                                                borderColor={"gray.300"}
+                                                borderRadius={"20px"}
+                                            >
+                                                <option value="H">Hombre</option>
+                                                <option value="M">Mujer</option>
+                                            </Select>
+                                            {errors.sexo && <Text color="red.500">{errors.sexo}</Text>}
+                                        </FormControl>
+
                             <Checkbox
     isChecked={isTermsChecked}
     onChange={(e) => setIsTermsChecked(e.target.checked)}
