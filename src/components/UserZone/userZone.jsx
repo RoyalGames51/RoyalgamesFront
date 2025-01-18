@@ -5,68 +5,18 @@ import {
     Stack,
     Flex,
     Image,
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    IconButton,
 } from "@chakra-ui/react";
-import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { useMemo, useEffect} from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import chips from "../../assets/chips.png";
-import { cleanCurrentUser , fetchFavoriteGames} from "../../redux/actions";
-import { useAuth } from "../../context/oauthContext";
-import Swal from "sweetalert2";
 import Select from 'react-select';
-
 
 export default function UserZone() {
     const { currentUser } = useSelector((state) => state);
     const memoizedUser = useMemo(() => currentUser, [currentUser]);
-    const auth = useAuth();
-    const dispatch = useDispatch();
     const navigate = useNavigate();
-    
 
-
-
-    // const options = [
-    //     { value: 'perfil', label: 'Perfil' },
-    //     { value: 'configuracion', label: 'Configuración' },
-    //     { value: 'movimientos', label: 'Movimientos' },
-    //     { value: 'logout', label: 'Cerrar sesión' },
-    //   ];
-
-    const handleLogOut = async () => {
-        try {
-            await auth.logOut();
-            localStorage.clear();
-            dispatch(cleanCurrentUser());
-            navigate("/"); // Redirige a la página de inicio
-            Swal.fire({
-                title: "¡Sesión cerrada con éxito!",
-                icon: "success",
-            });
-        } catch (error) {
-            console.error(`Error al cerrar sesión: ${error.message}`);
-        }
-    };
-    const handleChange = async (selectedOption) => {
-        if (selectedOption.value === 'logout') {
-            await auth.logOut();
-            localStorage.clear();
-            dispatch(cleanCurrentUser());
-            navigate("/"); // Redirige a la página de inicio
-            Swal.fire({
-                title: "¡Sesión cerrada con éxito!",
-                icon: "success",
-            });
-        } else {
-            window.location.href = `/${selectedOption.value}`;
-        }
-    };
     const options = [
         { value: "perfil", label: "Perfil" },
         { value: "configuracion", label: "Configuración" },
@@ -79,21 +29,21 @@ export default function UserZone() {
             ...base,
             backgroundColor: "transparent",
             border: "1px solid #393939",
-            boxShadow: state.isFocused ? "0 0 0 1px #393939" : "none", // Controla el borde en focus
+            boxShadow: state.isFocused ? "0 0 0 1px #393939" : "none",
             borderRadius: "4px",
             maxHeight: "70px",
             cursor: "pointer",
             marginLeft: "30px",
             paddingLeft: "4px",
             marginBottom: "0px",
-            transition: "all 0.2s ease-in-out", // Suaviza las transiciones
+            transition: "all 0.2s ease-in-out",
             "&:hover": {
-                border: "1px solid #555", // Cambia el borde al pasar el mouse
+                border: "1px solid #555",
             },
         }),
         placeholder: (base) => ({
             ...base,
-            display: "none", // Oculta el texto del placeholder
+            display: "none",
         }),
         indicatorsContainer: (base) => ({
             ...base,
@@ -116,7 +66,6 @@ export default function UserZone() {
         }),
     };
 
-
     return (
         <Flex
             w="fit-content"
@@ -135,35 +84,43 @@ export default function UserZone() {
             borderColor="gray.600"
             bgGradient="linear(to-b, #2e2e2e, black)"
         >
-            {console.log('mem', memoizedUser)}
-            {console.log('curr', currentUser)}
             {memoizedUser?.id ? (
                 <>
-                    <Avatar src={memoizedUser.avatar} />
-                    
-                    <Stack spacing={0} ml={3}>
-                        <Text fontWeight="bold" color="white">
-                            {memoizedUser.nick.charAt(0).toUpperCase() + memoizedUser.nick.slice(1)}
-                        </Text>
-                        <Flex align="center" color="gray.300">
-  <Image src={chips} alt="Chips" boxSize="1em" mr={2} />
-  <Text whiteSpace="nowrap">
-  {new Intl.NumberFormat('en-US').format(memoizedUser.chips).replace(/,/g, ' ')} fichas
-</Text>
-</Flex>
+                    <Box
+                        display="flex"
+                        alignItems="center"
+                        onClick={() => navigate("/perfil")} // Redirige a la ruta /perfil
+                        cursor="pointer"
+                    >
+                        <Avatar src={memoizedUser.image} />
 
-                    </Stack>
+                        <Stack spacing={0} ml={3}>
+                            <Text fontWeight="bold" color="white">
+                                {memoizedUser.nick.charAt(0).toUpperCase() + memoizedUser.nick.slice(1)}
+                            </Text>
+                            <Flex align="center" color="gray.300">
+                                <Image src={chips} alt="Chips" boxSize="1em" mr={2} />
+                                <Text whiteSpace="nowrap">
+                                    {new Intl.NumberFormat('en-US').format(memoizedUser.chips).replace(/,/g, ' ')} fichas
+                                </Text>
+                            </Flex>
+                        </Stack>
+                    </Box>
 
-                    {/* Menú desplegable */}
                     <Select
-
                         options={options}
-                        onChange={handleChange}
-                        placeholder="" // Deja el placeholder vacío
+                        onChange={(selectedOption) => {
+                            if (selectedOption.value === 'logout') {
+                                // Lógica para logout
+                            } else {
+                                navigate(`/${selectedOption.value}`);
+                            }
+                        }}
+                        placeholder=""
                         styles={customStyles}
-                        isSearchable={false} // Deshabilita la barra de búsqueda
+                        isSearchable={false}
                         components={{
-                            IndicatorSeparator: () => null, // Oculta la línea divisoria entre la flecha y el menú
+                            IndicatorSeparator: () => null,
                         }}
                     />
                 </>

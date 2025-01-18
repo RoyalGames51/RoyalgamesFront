@@ -191,6 +191,7 @@ export const createGame = (gameData) => async (dispatch) => {
     try {
         const response = await axios.post(`${API_BASE_URL}/game/create`, gameData);
         dispatch({ type: CREATE_GAME_SUCCESS, payload: response.data });
+        console.log('juego creado', response.data, gameData)
     } catch (error) {
         dispatch({ type: CREATE_GAME_FAILURE, payload: error.message });
     }
