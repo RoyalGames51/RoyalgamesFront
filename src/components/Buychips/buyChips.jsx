@@ -133,7 +133,7 @@ useEffect(() => {
       alert('¡Pago completado y fichas acreditadas!');
     } catch (err) {
       console.error('Error en el manejo de la aprobación:', err);
-      
+      window.location.href = 'royalgames.me'
     }
   };
   
