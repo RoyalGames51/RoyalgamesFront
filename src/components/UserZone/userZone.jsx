@@ -11,11 +11,14 @@ import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import chips from "../../assets/chips.png";
 import Select from 'react-select';
+import { useAuth } from "../../context/oauthContext";
 
 export default function UserZone() {
     const { currentUser } = useSelector((state) => state);
     const memoizedUser = useMemo(() => currentUser, [currentUser]);
     const navigate = useNavigate();
+     const auth = useAuth();
+     const dispatch = useDispatch();
 
     const options = [
         { value: "perfil", label: "Perfil" },
