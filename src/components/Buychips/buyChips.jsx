@@ -127,7 +127,7 @@ useEffect(() => {
       // Registrar el pago en el historial (opcional)
       
   
-      await axios.post('https://royalback-f340.onrender.com/register-payment', pay);
+      await axios.post('https://royalback-f340.onrender.com/newpay', pay);
   
       // Mostrar mensaje de éxito al usuario
       alert('¡Pago completado y fichas acreditadas!');
