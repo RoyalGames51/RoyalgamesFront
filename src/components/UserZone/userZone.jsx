@@ -65,6 +65,28 @@ export default function UserZone() {
             cursor: "pointer",
         }),
     };
+    const handleLogOut = async () => {
+        try {
+          await auth.logOut();  // Asumo que tu función logOut está implementada correctamente en useAuth
+          localStorage.clear();
+          window.location.reload()
+        //   navigate("/");
+          // window.location.reload();
+              Swal.fire({
+                title: "¡Sesión cerrada con éxito!",
+                icon: "success"
+              });
+    
+          // Limpiar el estado de Redux
+        dispatch(cleanCurrentUser());
+    
+    
+          // Redirigir al usuario a la página de inicio
+         
+        } catch (error) {
+          console.error(`Error al cerrar sesión: ${error.message}`);
+        }
+      };
 
     return (
         <Flex
@@ -111,7 +133,7 @@ export default function UserZone() {
                         options={options}
                         onChange={(selectedOption) => {
                             if (selectedOption.value === 'logout') {
-                                navigate(`/logout`)
+                                handleLogOut()
                             } else {
                                 navigate(`/${selectedOption.value}`);
                             }
