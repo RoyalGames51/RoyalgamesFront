@@ -106,6 +106,10 @@ useEffect(() => {
     try {
       // Capturar el pago en el backend
       const orderId = data.orderID;
+      await axios.put('https://royalback-f340.onrender.com/add/chips', {
+        id: currentUser?.id,
+        newChips: selectedChip.amount,
+      });
       const captureResponse = await axios.post('https://royalback-f340.onrender.com/capture-paypal-order', {
         orderId: orderId, // Enviar el ID de la orden al backend
       });
@@ -116,10 +120,7 @@ useEffect(() => {
       }
   
       // Acreditar fichas directamente
-      await axios.put('https://royalback-f340.onrender.com/add/chips', {
-        id: currentUser?.id,
-        newChips: selectedChip.amount,
-      });
+      
   
       // Registrar el pago en el historial (opcional)
       const pay = {
