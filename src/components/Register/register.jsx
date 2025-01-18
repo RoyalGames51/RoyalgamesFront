@@ -15,6 +15,9 @@ import {
     IconButton
 } from "@chakra-ui/react";
 import Select from 'react-select';
+import { Radio, RadioGroup } from "@chakra-ui/react";
+
+import { HStack } from "@chakra-ui/react"
 
 import { CloseIcon } from '@chakra-ui/icons'; // Ícono para el botón de cerrar
 import { useEffect, useState } from "react";
@@ -251,24 +254,16 @@ const RegistroForm = ({ onSwitchForm }) => {
                                             {errors.password && <Text color="red.500">{errors.password}</Text>}
                                         </FormControl>
                                         <FormControl isInvalid={errors.sexo}>
-                                            <Text fontSize="sm" mb={2}>Seleccione su género:</Text>
-                                            <Select
-                                                options={[
-                                                    { value: 'H', label: 'Hombre' },
-                                                    { value: 'M', label: 'Mujer' },
-                                                ]}
-                                                placeholder="Selecciona tu género"
-                                                onChange={(selectedOption) =>
-                                                    setInput({ ...input, sexo: selectedOption?.value || '' })
-                                                }
-                                                styles={{
-                                                    control: (provided) => ({
-                                                        ...provided,
-                                                        borderColor: 'gray.300',
-                                                        borderRadius: '20px',
-                                                    }),
-                                                }}
-                                            />
+                                            <FormLabel>Género</FormLabel>
+                                            <RadioGroup
+                                                onChange={(value) => setInput({ ...input, sexo: value })}
+                                                value={input.sexo}
+                                            >
+                                                <HStack spacing="24px">
+                                                    <Radio value="H">Hombre</Radio>
+                                                    <Radio value="M">Mujer</Radio>
+                                                </HStack>
+                                            </RadioGroup>
                                             {errors.sexo && <Text color="red.500">{errors.sexo}</Text>}
                                         </FormControl>
 
