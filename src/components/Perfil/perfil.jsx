@@ -8,46 +8,44 @@ import {
   Tab,
   TabPanel,
   Heading,
-  VStack,
   Text,
   Image,
-  Divider,
+  Flex,
+  VStack,
 } from "@chakra-ui/react";
 import GameGrid from "./../Juegos/juegos";
 import UpdateProfileForm from "./UpdateProfileForm";
 import { useParams } from "react-router-dom";
-import { fetchFavoriteGames, fetchPublicFavorites, viewedUserProfile } from "./../../redux/actions/index";
+import {
+  fetchFavoriteGames,
+  fetchPublicFavorites,
+  viewedUserProfile,
+} from "./../../redux/actions/index";
 
 const Perfil = ({ isPublic = false }) => {
   const dispatch = useDispatch();
   const { userNick } = useParams();
-  
+
   const currentUser = useSelector((state) => state.currentUser);
   const viewedUser = useSelector((state) => state.viewedUserProfile);
 
-
-
   useEffect(() => {
     if (isPublic) {
-      // Primero obtenemos el perfil del usuario público
       dispatch(viewedUserProfile(userNick));
     }
   }, [dispatch, userNick, isPublic]);
-  
+
   useEffect(() => {
     if (isPublic && viewedUser?.id) {
-      // Una vez que el perfil está cargado, obtenemos los juegos favoritos
       dispatch(fetchPublicFavorites(viewedUser.id));
     }
   }, [dispatch, isPublic, viewedUser?.id]);
-  
+
   useEffect(() => {
     if (!isPublic && currentUser?.id) {
-      // Para el usuario logueado, cargamos sus favoritos
       dispatch(fetchFavoriteGames(currentUser.id));
     }
   }, [dispatch, isPublic, currentUser?.id]);
-  
 
   const user = isPublic ? viewedUser : currentUser;
 
@@ -61,50 +59,112 @@ const Perfil = ({ isPublic = false }) => {
     );
   }
 
-  return (
-    <Box w="90%" m="0 auto" p="20px" bg="gray.100" borderRadius="15px" boxShadow="lg">
-      <Heading textAlign="center" mb="6" fontSize="3xl">
-        {isPublic ? `Perfil de ${user.nick}` : `Tu Perfil`}
-      </Heading>
+  const formattedNick =
+    user.nick.charAt(0).toUpperCase() + user.nick.slice(1).toLowerCase();
 
+  const defaultDescription = user.sexo === "H" ? "Soy un chico" : "Soy una chica";
+  const additionalDescription = [
+    user.country && `de ${user.country}`,
+    user.age && `, tengo ${user.age} años`,
+    user.description && `y quiero decir que: "${user.description}"`,
+  ]
+    .filter(Boolean)
+    .join(", ");
+
+  const finalDescription = `${defaultDescription}${
+    additionalDescription ? ` ${additionalDescription}` : ""
+  }.`;  
+
+  return (
+    <Box
+      w="90%"
+      m="0 auto"
+      mt="10px"
+      p="20px"
+      bg="white"
+      borderRadius="15px"
+      boxShadow="lg"
+      pb={"20%"}
+    >
       <Tabs variant="soft-rounded" colorScheme="teal" isFitted>
-        <TabList mb="4">
+        <TabList mb="4" position="relative">
           <Tab fontSize="lg" fontWeight="bold">Información</Tab>
           <Tab fontSize="lg" fontWeight="bold">Juegos Favoritos</Tab>
           {!isPublic && <Tab fontSize="lg" fontWeight="bold">Configuración</Tab>}
+
+          {/* Status del usuario */}
+          <Flex
+            position="absolute"
+            top="50px"
+            right="10px"
+            alignItems="center"
+            gap="2"
+          >
+            <Box
+              w="10px"
+              h="10px"
+              borderRadius="50%"
+              bg="green.400"
+            />
+            <Text fontSize="sm" color="green.600">
+              {currentUser?.status || "Conectado"}
+            </Text>
+          </Flex>
         </TabList>
 
         <TabPanels>
           <TabPanel>
-            <VStack spacing="6" align="center">
-              <Image
-                borderRadius="full"
-                boxSize="220px"
-                src={user.image || "https://via.placeholder.com/150"}
-                alt={`${user.nick} avatar`}
-                boxShadow="md"
-              />
-              <Text fontSize="3xl" fontWeight="bold" color="teal.600">
-                {user.nick}
-              </Text>
-              <Divider />
-              <Text fontSize="xl">{user.age} años</Text>
-              {user.description && (
-                <Text fontSize="xl" fontStyle="italic" color="gray.600">
-                  "{user.description}"
+            <Flex
+              direction={{ base: "column", md: "row" }}
+              align="start"
+              justify="flex-start"
+              gap="6"
+            >
+              {/* Nick e Imagen */}
+              <VStack
+                align="center"
+                spacing="4"
+                w={{ base: "100%", md: "40%" }}
+                bg="gray.100"
+                p="4"
+                borderRadius="10px"
+                boxShadow="sm"
+              >
+                <Text fontSize="3xl" fontWeight="bold" color="gray.700">
+                  {formattedNick}
                 </Text>
-              )}
-            </VStack>
+                <Image
+                  borderRadius="full"
+                  boxSize="220px"
+                  src={user.image || "https://via.placeholder.com/150"}
+                  alt={`${formattedNick} avatar`}
+                  boxShadow="md"
+                />
+              </VStack>
+
+              {/* Descripción */}
+              <Box
+                bg="gray.100"
+                borderRadius="10px"
+                p="4"
+                textAlign="left"
+                boxShadow="sm"
+                maxW="60%" // Limita el ancho máximo del contenedor según su contenido
+                w="fit-content" // Ajusta el ancho al contenido automáticamente
+              >
+                <Text fontSize="xl" color="gray.600">
+                  {finalDescription}
+                </Text>
+              </Box>
+            </Flex>
           </TabPanel>
 
-          
           <TabPanel>
-  <Heading size="lg" mb="4" textAlign="center">
-    Juegos Favoritos
-  </Heading>
-  <GameGrid  onlyFavorites={true} isPublicProfile={isPublic}  />
-</TabPanel>
-          
+            <Heading size="lg" mb="4" textAlign="center">
+              Juegos Favoritos
+            </Heading>
+            <GameGrid onlyFavorites={true} isPublicProfile={isPublic} />
+          </TabPanel>
 
           {!isPublic && (
             <TabPanel>

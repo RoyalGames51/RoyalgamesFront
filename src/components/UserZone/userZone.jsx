@@ -22,6 +22,7 @@ export default function UserZone() {
 
     const options = [
         { value: "perfil", label: "Perfil" },
+        {value: "amigos", label: "Amigos"},
         { value: "configuracion", label: "Configuración" },
         { value: "movimientos", label: "Movimientos" },
         { value: "logout", label: "Cerrar sesión" },
