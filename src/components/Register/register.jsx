@@ -27,6 +27,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { promo1millon } from '../../redux/actions';
 import registroimg from '../../assets/registro.png'
 
+const API_BASE_URL = "https://royalebacknest.onrender.com"
+//https://royalback-f340.onrender.com
+
 const RegistroForm = ({ onSwitchForm }) => {
     const navigate = useNavigate();
     const auth = useAuth();
@@ -36,6 +39,7 @@ const RegistroForm = ({ onSwitchForm }) => {
         nick: "",
         email: "",
         password: "",
+        confirmPassword: "",
     });
 
     const countUsers = useSelector((state) => state.counterUser);
@@ -45,6 +49,7 @@ const RegistroForm = ({ onSwitchForm }) => {
         nick: "",
         email: "",
         password: "",
+        confirmPassword: "",
         sexo: "",
     });
 
@@ -69,12 +74,14 @@ const RegistroForm = ({ onSwitchForm }) => {
         const nickError = await validateNick(input.nick);
         const emailError = validateEmail(input.email);
         const passwordError = validatePassword(input.password);
+        const confirmPasswordError = input.password !== input.confirmPassword ? "Las contraseñas no coinciden" : "";
 
         if (nickError || emailError || passwordError || !input.sexo) {
             setErrors({
                 nick: nickError || "",
                 email: emailError || "",
                 password: passwordError || "",
+                confirmPassword: confirmPasswordError || "",
                 sexo: input.sexo ? "" : "Debe seleccionar un genero"
             });
             return;
@@ -84,7 +91,7 @@ const RegistroForm = ({ onSwitchForm }) => {
 
             const [registerResponse, userResponse] = await Promise.all([
                 auth.register(input.email, input.password),
-                axios.post(`https://royalback-f340.onrender.com/user-create`, input)
+                axios.post(`${API_BASE_URL}/signup`, input)
 
             ]);
 
@@ -92,12 +99,12 @@ const RegistroForm = ({ onSwitchForm }) => {
             console.log("id", id);
 
             if (countUsers < 1000 && id) {
-                await axios.put('https://royalback-f340.onrender.com/add/chips', {
+                await axios.patch(`${API_BASE_URL}/add/chips`, {
                     id: id,
                     newChips: 1000000,
                 });
             } else if (countUsers > 1000 && id) {
-                await axios.put('https://royalback-f340.onrender.com/add/chips', {
+                await axios.patch(`${API_BASE_URL}/add/chips`, {
                     id: id,
                     newChips: 10000,
                 });
@@ -252,6 +259,19 @@ const RegistroForm = ({ onSwitchForm }) => {
                                                 borderRadius={"20px"}
                                             />
                                             {errors.password && <Text color="red.500">{errors.password}</Text>}
+                                        </FormControl>
+                                        <FormControl isInvalid={errors.confirmPassword}>
+                                            <Input
+                                                placeholder="Confirmar Contraseña"
+                                                type="password"
+                                                name="confirmPassword"
+                                                value={input.confirmPassword}
+                                                onChange={handleInputChange}
+                                                border={"1px"}
+                                                borderColor={"gray.300"}
+                                                borderRadius={"20px"}
+                                            />
+                                            {errors.confirmPassword && <Text color="red.500">{errors.confirmPassword}</Text>}
                                         </FormControl>
                                         <FormControl isInvalid={errors.sexo}>
                                             <FormLabel>Género</FormLabel>
