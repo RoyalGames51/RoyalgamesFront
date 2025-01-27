@@ -9,6 +9,8 @@ import Swal from "sweetalert2";
 import { getUserByEmail, getUserByNick } from "../../redux/actions";
 import axios from "axios";
 
+const API_URL = "https://royalebacknest.onrender.com";
+
 export default function Login() {
     const [isLoginOpen, setIsLoginOpen] = useState(false); // Estado para cuadro de inicio de sesión
     const auth = useAuth();
@@ -90,7 +92,7 @@ export default function Login() {
                     timer: 2500,
                 });
 
-                const response = await fetch('https://royalback-du3v.onrender.com/user/create', {
+                const response = await fetch(`${API_URL}/signup`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
