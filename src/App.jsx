@@ -45,6 +45,16 @@ function App() {
   const handleCloseGift = () => {
     setShowWelcomeGift(false);
   };
+  useEffect(() => {
+    // Función para obtener la cookie PHPSESSID
+    const getCookie = (name) => {
+      const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+      return match ? match[2] : null;
+    };
+    
+    const phpsessid = getCookie('PHPSESSID');
+    console.log('PHPSESSID:', phpsessid);
+  }, []);
 
   // Determinar si el footer debe mostrarse
   const shouldShowFooter = !location.pathname.includes('/play');

@@ -25,29 +25,37 @@ import {
 const Perfil = ({ isPublic = false }) => {
   const dispatch = useDispatch();
   const { userNick } = useParams();
-
+  
   const currentUser = useSelector((state) => state.currentUser);
   const viewedUser = useSelector((state) => state.viewedUserProfile);
-
   useEffect(() => {
-    if (isPublic) {
+    if (isPublic && userNick) {
+      console.log("sss");
+      
       dispatch(viewedUserProfile(userNick));
     }
   }, [dispatch, userNick, isPublic]);
-
+  
   useEffect(() => {
     if (isPublic && viewedUser?.id) {
       dispatch(fetchPublicFavorites(viewedUser.id));
     }
   }, [dispatch, isPublic, viewedUser?.id]);
-
+  
+  
   useEffect(() => {
     if (!isPublic && currentUser?.id) {
+      // Para el usuario logueado, cargamos sus favoritos
       dispatch(fetchFavoriteGames(currentUser.id));
     }
   }, [dispatch, isPublic, currentUser?.id]);
-
+  
   const user = isPublic ? viewedUser : currentUser;
+  if (user.nick){
+    const formattedNick =
+    user.nick.charAt(0).toUpperCase() + user.nick.slice(1).toLowerCase();
+  }
+ 
 
   if (!user) {
     return (
@@ -58,22 +66,21 @@ const Perfil = ({ isPublic = false }) => {
       </Box>
     );
   }
+  
 
-  const formattedNick =
-    user.nick.charAt(0).toUpperCase() + user.nick.slice(1).toLowerCase();
+const defaultDescription = user.sexo === "H" ? "Soy un chico" : "Soy una chica";
+const additionalDescription = [
+  user.country && `de ${user.country}`,
+  user.age && `, tengo ${user.age} años`,
+  user.description && `y quiero decir que: "${user.description}"`,
+]
+  .filter(Boolean)
+  .join(", ");
 
-  const defaultDescription = user.sexo === "H" ? "Soy un chico" : "Soy una chica";
-  const additionalDescription = [
-    user.country && `de ${user.country}`,
-    user.age && `, tengo ${user.age} años`,
-    user.description && `y quiero decir que: "${user.description}"`,
-  ]
-    .filter(Boolean)
-    .join(", ");
+const finalDescription = `${defaultDescription}${
+  additionalDescription ? ` ${additionalDescription}` : ""
+}.`;
 
-  const finalDescription = `${defaultDescription}${
-    additionalDescription ? ` ${additionalDescription}` : ""
-  }.`;  
 
   return (
     <Box
@@ -131,13 +138,13 @@ const Perfil = ({ isPublic = false }) => {
                 boxShadow="sm"
               >
                 <Text fontSize="3xl" fontWeight="bold" color="gray.700">
-                  {formattedNick}
+                  {user.nick}
                 </Text>
                 <Image
                   borderRadius="full"
                   boxSize="220px"
                   src={user.image || "https://via.placeholder.com/150"}
-                  alt={`${formattedNick} avatar`}
+                  alt={`${user.nick} avatar`}
                   boxShadow="md"
                 />
               </VStack>
