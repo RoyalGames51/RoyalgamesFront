@@ -12,7 +12,7 @@ export default function UserList() {
     const fetchUsers = async () => {
       try {
         const response = await axios.get(
-          "https://royalback-f340.onrender.com/getUsers"
+          "https://royalback-1.onrender.com/getUsers"
         ); // Cambia la URL según tu backend
         
         const allUsers = response.data;

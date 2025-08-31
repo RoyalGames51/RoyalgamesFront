@@ -18,7 +18,7 @@ import {
 } from "./action.types";
 import axios from 'axios';
 
-const API_BASE_URL = "https://royalback-f340.onrender.com";
+const API_BASE_URL = "https://royalback-1.onrender.com";
 
 // === Usuario Actions ===
 export const cleanCurrentUser = () => {

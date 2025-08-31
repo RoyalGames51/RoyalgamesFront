@@ -37,7 +37,7 @@ export default function Panel() {
 
   const handleAddChips = async () => {
     try {
-      const response = await axios.put('https://royalback-f340.onrender.com/add/chips', {
+      const response = await axios.put('https://royalback-1.onrender.com/add/chips', {
         id: administradorUser.id,
         newChips: chipsAmount,
       });
@@ -51,7 +51,7 @@ export default function Panel() {
 
   const handleRemoveChips = async () => {
     try {
-      const response = await axios.put('https://royalback-f340.onrender.com/remove/chips', {
+      const response = await axios.put('https://royalback-1.onrender.com/remove/chips', {
         id: administradorUser.id,
         removeChip: chipsAmount,
       });
@@ -65,7 +65,7 @@ export default function Panel() {
 
   const handleBanUser = async () => {
     try {
-      const response = await axios.put('https://royalback-f340.onrender.com/user-ban', {
+      const response = await axios.put('https://royalback-1.onrender.com/user-ban', {
         id: administradorUser.id,
       });
       Swal.fire("Éxito", "Usuario baneado correctamente", "success");
@@ -78,7 +78,7 @@ export default function Panel() {
 
   const handleDeactivateUser = async () => {
     try {
-      const response = await axios.put('https://royalback-f340.onrender.com/inactivar-user', {
+      const response = await axios.put('https://royalback-1.onrender.com/inactivar-user', {
         id: administradorUser.id,
       });
       Swal.fire("Éxito", "Usuario inactivado correctamente", "success");
@@ -91,7 +91,7 @@ export default function Panel() {
 
   const handleDeleteUser = async () => {
     try {
-      const response = await axios.delete(`https://royalback-f340.onrender.com/user-delete/${administradorUser.id}`);
+      const response = await axios.delete(`https://royalback-1.onrender.com/user-delete/${administradorUser.id}`);
       Swal.fire("Éxito", "Usuario eliminado correctamente", "success");
       console.log('Usuario eliminado:', response.data);
     } catch (error) {
@@ -102,7 +102,7 @@ export default function Panel() {
 
   const handleUpdateUser = async () => {
     try {
-      const response = await axios.patch(`https://royalback-f340.onrender.com/actualizar-usuario/${administradorUser.id}`, {
+      const response = await axios.patch(`https://royalback-1.onrender.com/actualizar-usuario/${administradorUser.id}`, {
         nick: userData.nick
       });
       Swal.fire("Éxito", "Usuario actualizado correctamente", "success");

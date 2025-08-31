@@ -88,7 +88,7 @@ useEffect(() => {
 
     try {
       const response = await axios.post(
-        "https://royalback-f340.onrender.com/paypal/create-order",
+        "https://royalback-1.onrender.com/paypal/create-order",
         {
           price: (selectedChip.basePrice * exchangeRate).toFixed(2),
           userId: currentUser?.id || "guest",
@@ -106,7 +106,7 @@ useEffect(() => {
     try {
       // Capturar el pago en el backend
       const orderId = data.orderID;
-      await axios.put('https://royalback-f340.onrender.com/add/chips', {
+      await axios.put('https://royalback-1.onrender.com/add/chips', {
         id: currentUser?.id,
         newChips: selectedChip.amount,
       });
@@ -118,7 +118,7 @@ useEffect(() => {
         chips: selectedChip.amount,
         price: selectedChip.basePrice,
       };
-      const captureResponse = await axios.post('https://royalback-f340.onrender.com/capture-paypal-order', {
+      const captureResponse = await axios.post('https://royalback-1.onrender.com/capture-paypal-order', {
         orderId: orderId, // Enviar el ID de la orden al backend
       });
   
@@ -127,7 +127,7 @@ useEffect(() => {
       // Registrar el pago en el historial (opcional)
       
   
-      await axios.post('https://royalback-f340.onrender.com/newpay', pay);
+      await axios.post('https://royalback-1.onrender.com/newpay', pay);
   
       // Mostrar mensaje de éxito al usuario
       alert('¡Pago completado y fichas acreditadas!');
@@ -159,11 +159,11 @@ useEffect(() => {
     
 
     // Determinar la ruta de la orden según la moneda
-    let apiUrl = "https://royalback-f340.onrender.com/mepago/create-order"; // Ruta por defecto
+    let apiUrl = "https://royalback-1.onrender.com/mepago/create-order"; // Ruta por defecto
     if (currency === "ARS") {
-      apiUrl = "https://royalback-f340.onrender.com/mepago/create-order";
+      apiUrl = "https://royalback-1.onrender.com/mepago/create-order";
     } else if (currency === "MXN") {
-      apiUrl = "https://royalback-f340.onrender.com/mepago/create-order/mx";
+      apiUrl = "https://royalback-1.onrender.com/mepago/create-order/mx";
     }
 
     try {

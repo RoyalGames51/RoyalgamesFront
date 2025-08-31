@@ -30,7 +30,7 @@ function App() {
         const timer = setTimeout(() => setShowWelcomeGift(true), 2500);
 
         try {
-          await axios.put('https://royalback-f340.onrender.com/firstchips', { id: currentUser.id });
+          await axios.put('https://royalback-1.onrender.com/firstchips', { id: currentUser.id });
         } catch (error) {
           console.error('Error actualizando firstChips:', error);
         }
