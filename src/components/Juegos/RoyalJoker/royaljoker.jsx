@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Box, Spinner, Center } from "@chakra-ui/react";
 
 const RoyalJoker = () => {
-  const currentUser = useSelector((state: any) => state.currentUser);
+  const currentUser = useSelector((state) => state.currentUser);
   const jugadorID = currentUser?.id || "default-id";
 
   const gameURL = `https://html-classic.itch.zone/html/14848609/rj6/index.html?jugadorID=${jugadorID}`;
