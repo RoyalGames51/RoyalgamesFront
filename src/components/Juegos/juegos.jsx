@@ -13,7 +13,7 @@ import { useSelector, useDispatch } from "react-redux";
 const GAMES = [
   // { id: "40cf64b9-35a2-4953-beee-ca764135337b", src: juego1, path: "/loteria-instantanea", alt: "Lotería" },
   // { id: "a438f824-2f97-492d-89ba-73e213930ecb", src: juego2, path: "/ruleta", alt: "Ruleta" },
-   { id: "02814291-c075-4b77-8105-10b912f9dd31", src: juego3, path: "/royal-joker", alt: "RoyalJoker" },
+   { id: "02814291-c075-4b77-8105-10b912f9dd31", src: juego3, path: "/play/royal-joker", alt: "RoyalJoker" },
   { id: "501ffe04-71e2-44c9-a06a-f97df1babd0a", src: juego4, path: "/play/minas", alt: "Minas" },
 ];
 
