@@ -8,7 +8,7 @@ const RoyalJoker = () => {
   const jugadorID = currentUser?.id || "default-id"; // Valor por defecto si no hay usuario
 
   // URL del juego con el jugadorID
-  const gameURL = `https://html-classic.itch.zone/html/14838507/rj1/index.html?jugadorID=${jugadorID}`;
+  const gameURL = `https://html-classic.itch.zone/html/14848435/rj3/index.html?jugadorID=${jugadorID}`;
 
   return (
     <Box

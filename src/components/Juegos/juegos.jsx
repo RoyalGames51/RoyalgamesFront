@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import FavoriteButton from "./FavoriteButton";
 import juego1 from "../../assets/IMG_4119.png";
 import juego2 from "../../assets/ruleta.png";
-import juego3 from "../../assets/bingoproxi.png";
+import juego3 from "../../assets/rj.jpg";
 import juego4 from "../../assets/minas.png";
 import { useSelector, useDispatch } from "react-redux";
 
