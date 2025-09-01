@@ -17,7 +17,7 @@ const RoyalJoker = () => {
       display="flex"
       flexDirection="column"
       // 👉 empuja el contenido 1 cm hacia abajo
-      pt="15px"
+      pt="10px"
       // evita que aparezca una scrollbar de la página
       overflow="hidden"
     >
@@ -28,7 +28,7 @@ const RoyalJoker = () => {
           position="relative"
           w="100%"
           // resta el padding-top para que no desborde
-          h="calc(100% - 1cm)"
+          h="calc(100% - 10px)"
           bg="gray.800"
           overflow="hidden"
         >
