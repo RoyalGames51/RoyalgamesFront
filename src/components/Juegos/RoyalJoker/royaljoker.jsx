@@ -6,7 +6,7 @@ const RoyalJoker = () => {
   const currentUser = useSelector((state) => state.currentUser);
   const jugadorID = currentUser?.id || "default-id";
 
-  const gameURL = `https://html-classic.itch.zone/html/15019887/s1/index.html?jugadorID=${jugadorID}`;
+  const gameURL = `https://html-classic.itch.zone/html/15020780/s2/index.html?jugadorID=${jugadorID}`;
 
   return (
     <Box
